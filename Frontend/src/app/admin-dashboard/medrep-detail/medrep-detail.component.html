@@ -1,0 +1,36 @@
+<div class="medrep-detail">
+    <h2>{{ data?.first_name }} {{ data?.last_name }}</h2>
+    <div class="details-container">
+      <div class="detail-item">
+        <mat-icon>email</mat-icon>
+        <span>Email</span>
+        <span>{{ data?.email }}</span>
+      </div>
+      <div class="detail-item">
+        <mat-icon>location_on</mat-icon>
+        <span>Address</span>
+        <span>{{ data?.street }}, {{ data?.city }}, {{ data?.state }}</span>
+      </div>
+      <div class="detail-item">
+        <mat-icon>place</mat-icon>
+        <span>Territory</span>
+        <span>{{ data?.territory }}</span>
+      </div>
+      <div class="detail-item">
+        <mat-icon>phone</mat-icon>
+        <span>Phone number</span>
+        <span>{{ data?.phone_number }}</span>
+      </div>
+      <div class="detail-item">
+        <mat-icon>calendar_today</mat-icon>
+        <span>Birth date</span>
+        <span>{{ data?.birthDate | date }}</span>
+      </div>
+      <div class="detail-item">
+        <mat-icon>person</mat-icon>
+        <span>Gender</span>
+        <span>{{ data?.gender }}</span>
+      </div>
+    </div>
+  </div>
+  

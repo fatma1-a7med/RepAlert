@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: #1CA4AC;
+  }
+  
+
+  .logo .logo_text{
+    margin-left: 3px;
+    margin-top: 6px;
+    font-family: "Lobster Two", sans-serif;
+     font-weight: 700;
+     font-style: normal;
+    font-size: 29px;
+ 
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-profile mat-icon {
+    margin-right: 8px;
+  }

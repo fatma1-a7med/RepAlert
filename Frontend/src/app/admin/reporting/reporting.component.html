@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="dropdown">
+      <select id="doctorSelect" #doctorSelect>
+        <option value="" disabled selected>Select a doctor</option>
+        <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.first_name }} {{ doctor.last_name }}</option>
+      </select>
+      <button class="search-button" (click)="filterByDoctor(doctorSelect.value)">Search</button>
+    </div>
+    <div>
+      <h3> Reporting </h3>
+      <hr class=" custom-hr">
+    </div>
+   <div class="mt-5 d-flex justify-content-between align-items-center">
+    <h4 class="card-header"><i class="fas fa-file-alt"></i> Visit Report</h4>
+  
+    <button class="search-button" (click)="generatePDF()">Download PDF</button>
+   </div>
+  
+    <div id="visit-report-content">
+      <div *ngFor="let visit of filteredVisitReports" class="visit-report-card">
+        <h5><i class="fas fa-file-alt"></i> Visit Report</h5>
+        <div class="visit-detail">
+          <p><strong>Date:</strong> {{ visit.visit_date }}</p>
+          <p><strong>Time:</strong> {{ visit.visit_time }}</p>
+          <p><strong>Location:</strong> {{ visit.doctors[0].street }}, {{ visit.doctors[0].state }}, {{ visit.doctors[0].city }}</p>
+        </div>
+  
+        <h5><i class="far fa-user"></i> Healthcare Professional Details</h5>
+        <div class="visit-detail">
+          <p><strong>Name:</strong> {{ visit.doctors[0].first_name }} {{ visit.doctors[0].last_name }}</p>
+          <p><strong>Specialization:</strong> {{ visit.doctors[0].specialization }}</p>
+          <p><strong>Contact:</strong> {{ visit.doctors[0].phone_number }}</p>
+        </div>
+  
+        <h5><i class="fas fa-book-open"></i> Purpose of Visit</h5>
+        <p class="visit-detail">{{ visit.purpose }}</p>
+      </div>
+    </div>
+  
+</div>

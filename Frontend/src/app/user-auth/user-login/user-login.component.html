@@ -1,0 +1,57 @@
+<nav class="d-flex justify-content-between m-auto" style="width: 95vw;">
+    <div class="logo d-flex">
+      <img src="../../../assets/images/second_logo.svg" alt="RepAlert" width="50" height="50" class="mt-2"/>
+      <h4 class="logo_text">RepAlert</h4>
+    </div>
+  </nav>
+  
+  <div class="page d-flex">
+    <div class="leftSide">
+      <div class="rectangle"></div>
+      <img src="../../../assets/images/Coffee 1.png" id="coffee">
+      <h4 class="first_para mb-3">Great to have you back!</h4><br>
+      <p class="second_para mt-5">Consequat adipisicing ea do labore irure adipisicing occaecat cupidatat excepteur duis mo</p>
+    </div>
+    
+    <div class="container mt-5 rightSide">
+      <div class="card">
+  
+  
+        <h2 class="text-center mt-3">User Login</h2>
+  
+        <div class="card-body" style="margin-top: 30px;">
+          <form [formGroup]="userForm" (ngSubmit)="onLogin()" class="form row g-3 needs-validation">
+            <div class="col-12 mb-3">
+              <label for="email">Email</label>
+              <input class="form-control" type="email" placeholder="Enter your email" id="email" formControlName="email">
+              <div *ngIf="isFormSubmitted && email?.invalid" class="error-message">
+                <small *ngIf="email?.errors?.['required']">Email is required.</small>
+                <small *ngIf="email?.errors?.['email']">Email must be a valid email address.</small>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="password">Password</label>
+              <input class="form-control" type="password" placeholder="Enter your password" id="password" formControlName="password">
+              <div *ngIf="isFormSubmitted && password?.invalid" class="error-message">
+                <small *ngIf="password?.errors?.['required']">Password is required.</small>
+                <small *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+              </div>
+            </div>
+            
+            <div class="col-12 d-grid 2">
+              <button type="submit" class="btn custom-button text-center mt-2"  [disabled]="userForm.invalid" routerLink="/user/home">SignIn</button>
+            </div>
+            <div *ngIf="errorMessage" class="error-message text-danger">
+              {{ errorMessage }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   <div class="background"></div>
+  
+  
+  
+  

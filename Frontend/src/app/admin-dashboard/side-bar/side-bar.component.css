@@ -1,0 +1,32 @@
+.sidebar {
+    margin-top:60px;
+    height: 100vh;
+    width: 210px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1CA4AC;
+    padding-top: 100px;
+    /* z-index: 1; */
+
+  }
+  .sidebar a {
+    padding: 10px;
+
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  .sidebar a:hover {
+    background-color: #139b9f;
+  }
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+  }
+  .sidebar a span{
+    margin-top: -5rem;
+    margin-left: .4rem;
+  }

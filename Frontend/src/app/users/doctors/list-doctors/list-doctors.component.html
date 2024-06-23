@@ -1,0 +1,61 @@
+<div class="container">
+  <form class="mb-3" (ngSubmit)="search()">
+      <div style="margin-left: 130px;" class="mt-5">
+          <div class="container row">
+              <!-- Name Search -->
+              <div class="container row">
+                  <div class="col-md-12 col-sm-12 col-lg-8">
+                      <label for="username" class="form-label">Full Name</label>
+                      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username">
+                  </div>
+                  <button type="button" class="btn text-light col-md-12 col-lg-3 col-sm-12 m-4" (click)="search()" style="background-color: #1CA4AC; color:#fff;">Search by Name</button>
+              </div>
+          </div>
+      </div>
+  </form>
+ 
+
+      <h3 class="text-dark">Doctors List</h3>
+      <hr class="custom-hr">
+      <div>
+        <a class="add-sale-btn">
+          <mat-icon class="custom-add-icon" (click)="openaddForm()">add_circle</mat-icon>
+        </a>
+      </div>
+    </div>
+    <div *ngIf="doctors && doctors.length > 0" class="container">
+      <table class="table table-striped custom-table">
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Full Name</th>
+            <th class="text-center" scope="col">Phone Number</th>
+            <th class="text-center" scope="col">Specialization</th>
+            <th class="text-center" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doctor of doctors">
+            <td>{{ doctor.first_name }} {{ doctor.last_name }}</td>
+            <td>{{ doctor.phone_number }}</td>
+            <td>{{ doctor.specialization }}</td>
+            <td>
+                <a [routerLink]="['/user/show-doctor', doctor.id]">
+                    <mat-icon class="custom-info-icon">visibility</mat-icon>
+                </a>
+                <a (click)="openaddeditform(doctor)">
+                    <mat-icon class="custom-edit-icon">edit</mat-icon>
+                </a>
+               <a (click)="deleteDoctor(doctor.id)">
+                <mat-icon class="custom-delete-icon">delete</mat-icon>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="doctors && doctors.length === 0" class="container">
+      <h3 class="alert alert-info">No doctors data available.</h3>
+    </div>
+    <div *ngIf="!doctors" class="container">
+      <p class="alert alert-danger">Loading...</p>
+    </div>

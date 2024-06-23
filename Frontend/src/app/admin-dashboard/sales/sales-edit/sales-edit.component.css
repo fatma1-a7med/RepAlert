@@ -1,0 +1,23 @@
+.custom-form {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased shadow effect */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 10px; /* Rounded corners for the form */
+    border: 2px solid #1CA4AC; /* Form border color */
+    margin-top: 20px; /* Top margin */
+  }
+
+  .custom-hr {
+    border-top: 3px solid #1CA4AC; /* Custom horizontal rule color */
+    width: 31%; /* Width of the horizontal rule */
+    margin-top: -.3rem; /* Negative top margin to align with heading */
+  }
+
+  .btn-primary {
+    background-color: #1CA4AC; /* Button background color */
+    border-color: #1CA4AC; /* Button border color */
+  }
+
+  .btn-primary:hover {
+    background-color: #0C728C; /* Button background color on hover */
+    border-color: #0C728C; /* Button border color on hover */
+  }

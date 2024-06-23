@@ -1,0 +1,98 @@
+<div class="container Visit_content">
+ 
+
+  <!-- Search Form -->
+  <form class="mb-3" >
+  <div style="margin-left: 130px;" class="mt-5">
+    <div class=" container row">
+      <!-- Date Range Search -->
+      <div class="col-md-6 col-sm-6 col-lg-4">
+        <label for="startDate" class="form-label ">Start Date</label>
+        <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="startDate">
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-4">
+       <label for="endDate" class="form-label">End Date</label>
+        <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="endDate">
+      </div>
+      <button class="btn text-light  col-md-12 col-lg-2 col-sm-12 m-4" (click)="searchByDateRange()"  style="background-color: #1CA4AC; color:#fff;" >Filter</button>
+     </div>
+  <!-- Name Search -->
+   <div class="container row">
+     <div class="col-md-12 col-sm-12 col-lg-8">
+       <label for="username" class="form-label">Full Name</label>
+       <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username">
+     </div>
+ 
+     <button class="btn text-light  col-md-12 col-lg-3 col-sm-12 m-4" (click)="searchByUsername()" style="background-color: #1CA4AC; color:#fff;">Search by Name</button>
+      </div>
+  </div>
+  </form>
+  
+  <div>
+    <h3 class="mt-5">Visit mangment</h3>
+    <hr class=" custom-hr">
+  </div>
+
+
+  
+  <table class="table table-striped custom-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>UserName</th>
+        <th>Date OF Visit</th>
+        <th>Doctor Name</th>
+        <th>Status</th>
+        <th>Show</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visit of visitDate">
+        <td>{{ visit.id }}</td>
+        <td>{{ visit.medical_rep_fullname }}</td>
+        <td>{{ visit.visit_date }}</td>
+        <td>{{ getDoctorNames(visit.doctor) }}</td>
+        <td>{{ visit.status }}</td>
+        <td>
+          <button type="button" class="btn text-light" style="background-color:#24A8EF;" data-bs-toggle="modal" data-bs-target="#modalVisitDetails" (click)="showVisitDetails(visit.id)">
+            Show
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalVisitDetails" tabindex="-1" aria-labelledby="modalVisitDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVisitDetailsLabel">Visit Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3 m-3" *ngIf="selectedVisit" >
+          <p><strong class="text-primary" >Medical Rep Name:</strong> {{ selectedVisit.user_full_name }}</p>
+          <p><strong class="text-primary">Doctor Name:</strong> {{ selectedVisit.doctor_name }}</p>
+          <p><strong class="text-primary">Status:</strong> {{ selectedVisit.status }}</p>
+          <p><strong class="text-primary">Tools:</strong> {{ getToolNames(selectedVisit.tools) }}</p>
+          <p><strong class="text-primary">Territory:</strong> {{ selectedVisit.territory }}</p>
+          <p><strong class="text-primary">City:</strong> {{ selectedVisit.city }}</p>
+          <p><strong class="text-primary">State:</strong> {{ selectedVisit.state }}</p>
+          <p ><strong class="text-primary">Location Info:</strong></p>
+          <ul class="m-3" >
+            <li>Latitude: {{ selectedVisit.location_info.latitude }}</li>
+            <li>Longitude: {{ selectedVisit.location_info.longitude }}</li>
+            <li>Timestamp: {{ selectedVisit.location_info.timestamp }}</li>
+            <li>Altitude: {{ selectedVisit.location_info.altitude }}</li>
+            <li>Accuracy: {{ selectedVisit.location_info.accuracy }}</li>
+            <li>Speed: {{ selectedVisit.location_info.speed }}</li>
+            <li>Direction: {{ selectedVisit.location_info.direction }}</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+    <div>
+      <h3 class="text-dark">Doctor Details</h3>
+      <hr class="custom-hr">
+    </div>
+    
+    <div *ngIf="doctor" class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped custom-table">
+            <thead class="text-center"> 
+                <th>Field</th>
+                <th>Info</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Full Name</strong></td>
+                <td>{{ doctor?.first_name + " " + doctor?.last_name }}</td>
+              </tr>
+              <tr>
+                <td><strong>Phone Number</strong></td>
+                <td>{{ doctor?.phone_number }}</td>
+              </tr>
+              <tr>
+                <td><strong>Specialization</strong></td>
+                <td>{{ doctor?.specialization }}</td>
+              </tr>
+              <tr>
+                <td><strong>Email</strong></td>
+                <td>{{ doctor?.email }}</td>
+              </tr>
+              <tr>
+                <td><strong>Class Rate</strong></td>
+                <td>{{ doctor?.class_rate }}</td>
+              </tr>
+              <tr>
+                <td><strong>Territory</strong></td>
+                <td>{{ doctor?.territory }}</td>
+              </tr>
+              <tr>
+                <td><strong>State</strong></td>
+                <td>{{ doctor?.state }}</td>
+              </tr>
+              <tr>
+                <td><strong>City</strong></td>
+                <td>{{ doctor?.city }}</td>
+              </tr>
+              <tr>
+                <td><strong>Street</strong></td>
+                <td>{{ doctor?.street }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <a routerLink="/user/list-All-Doctors" class="btn btn-info ">Back to Doctors List</a>
+      </div>
+    </div>
+  
+    <div *ngIf="!doctor" class="container">
+      <p class="alert alert-danger">Loading...</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,103 @@
+.container{
+  margin-top: 15px;
+  margin-left: 250px;
+  width: 70vw;
+}
+.fc-event-time, .fc-event-title {
+  display: block; /* Ensure they are block elements to appear one above the other */
+  font-size: 0.47em; /* Adjust the size as needed */
+  color: rgb(0, 255, 149); /* Customize the color if necessary */
+  line-height: 1.2em; /* Adjust line height if necessary for spacing */
+  margin: 0; /* Remove any default margin */
+  padding: 0; /* Remove any default padding */
+}
+
+.activity-monitoring {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.centered-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filters, .search-by-name {
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field {
+  margin-right: 20px; /* Adds space between elements */
+}
+
+.user-select .mat-form-field-wrapper {
+  width: 200px;
+}
+
+.filter-button, .search-button {
+  background-color: #2196F3;
+  color: white;
+  margin-left: 20px; /* Adds space between button and previous element */
+}
+
+.filters .mat-form-field:first-child {
+  margin-right: 40px; 
+}
+
+.search-by-name .mat-form-field:first-child {
+  margin-right: 40px; /* Adds more space between first name and last name fields */
+}
+
+.visit-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.visit-history, .planned-visits {
+  width: 48%;
+}
+
+.visit-history {
+  border: 1px solid #E0E0E0;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.visit-card {
+  border: 1px solid #E0E0E0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.visit-card p {
+  margin: 0;
+}
+
+.visit-card .visit-name {
+  font-weight: bold;
+}
+
+.planned-visits {
+  border: 1px solid #E0E0E0;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+.full-calendar {
+  height: 100%;
+  width: 100%;
+}
+.custom-hr {
+  border-top: 3px solid #1CA4AC; 
+  width: 23%; 
+ margin-top: -.2rem;
+}
+
+

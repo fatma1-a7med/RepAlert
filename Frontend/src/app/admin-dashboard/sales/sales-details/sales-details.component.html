@@ -1,0 +1,41 @@
+<div class="container mt-4" style="width: 40vw;">
+  <div class="card border-0">
+    <div class="card-body">
+      <h1 class="card-title text-center mb-4">{{ sale.product_name }}</h1>
+
+      <div class="row mb-4">
+        <div class="col-md-6 ">
+          <div class="card bg-light border-0 ">
+            <div class="card-body small_card ">
+              <ul class="list-unstyled">
+                <li><strong>Admin ID:</strong> {{ sale.admin_id }}</li>
+                <li><strong>User ID:</strong> {{ sale.user_id }}</li>
+                <li><strong>Total Units:</strong> {{ sale.total_units }}</li>
+                <li><strong>Unit Price:</strong> {{ sale.unit_price }}</li>
+                <li><strong>Target Units:</strong> {{ sale.target_units }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6" style="position: relative;top: 10rem; right: -.1rem;">
+          <div class="card bg-light border-0">
+            <div class="card-body small_card">
+              <ul class="list-unstyled">
+                <li><strong>Unit Target Price:</strong> {{ sale.unit_target_price }}</li>
+                <li><strong>Total Target Price:</strong> {{ sale.total_target_price }}</li>
+                <li><strong>Total Actual Price:</strong> {{ sale.total_actual_price }}</li>
+                <li><strong>Start Date:</strong> {{ sale.start_date }}</li>
+                <li><strong>End Date:</strong> {{ sale.end_date }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div >
+        <a routerLink="../../../../admin-dashboard/sales" class="btn btn-primary">Back to Sales List</a>
+      </div>
+    </div>
+  </div>
+</div>

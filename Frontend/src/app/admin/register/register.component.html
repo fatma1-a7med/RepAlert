@@ -1,0 +1,136 @@
+<nav class="d-flex justify-content-between m-auto" style="width: 95vw;">
+  
+  <div class="logo d-flex">
+    <img src="../../../assets/images/second_logo.svg" alt="RepAlert" width="50" height="50" class="mt-2"/>
+    <h4 class="logo_text">RepAlert</h4>
+  </div>
+   <div class="text-center mt-3">
+     <div class="signup-link text-center">Already have an account? <a routerLink="/admin/login" class="loginRoute">Login</a></div>
+   </div>
+ </nav>
+ <div class="page">
+   <div class="leftSide">
+     <div class="rectangle"></div>
+     <img src="../../../assets/images/Coffee 1.png" id="coffee">
+     <h4 class="first_para">Great to See you!</h4>
+     <p class="second_para">Consequat adipisicing ea do labore irure adipisicing occaecat cupidatat excepteur duis mo</p>
+   </div>
+   
+ 
+ <div class="container mt-5 rightSide">
+   <div class="card">
+ 
+       <h2 class="text-center mt-1">Sign Up</h2>
+    
+     <div class="card-body">
+       <form (ngSubmit)="onSubmit()" class="row g-3 needs-validation" [formGroup]="userForm">
+         <div class="d-flex justify-content-evenly">
+       
+             <div class="mb-1">
+               <label for="first_name" class="form-label">First Name</label>
+               <input type="text" class="form-control" formControlName="first_name" id="first_name" placeholder="Enter your name" required>
+               <div class="text-danger" *ngIf="userForm.controls['first_name'].invalid && (isFormSubmitted || userForm.controls['first_name'].touched || userForm.controls['first_name'].dirty)">
+                 <span *ngIf="userForm.controls['first_name'].errors?.['required']">First name Is Required</span>
+                 <span *ngIf="userForm.controls['first_name'].errors?.['minlength']">First Name must be at least 6 characters long.</span>
+               </div>    
+             </div>
+ 
+             <div class="mb-1">
+               <label for="last_name" class="form-label">Last Name</label>
+               <input type="text" class="form-control" formControlName="last_name" id="last_name" placeholder="Enter your last name" required>
+               <div class="text-danger" *ngIf="userForm.controls['last_name'].invalid && (isFormSubmitted || userForm.controls['last_name'].touched || userForm.controls['last_name'].dirty)">
+                 <span *ngIf="userForm.controls['last_name'].errors?.['required']">Last name Is Required</span>
+                 <span *ngIf="userForm.controls['last_name'].errors?.['minlength']">Last name must be at least 4 characters long.</span>
+               </div>          
+             </div>
+       </div>
+       <div class="d-flex justify-content-evenly">
+ 
+             <div class="mb-1">
+               <label for="email" class="form-label">Email</label>
+               <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter your email" required>
+               <div class="text-danger" *ngIf="userForm.controls['email'].invalid && (isFormSubmitted || userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                 <span *ngIf="userForm.controls['email'].errors?.['required']">Email Is Required</span>
+                 <span *ngIf="userForm.controls['email'].errors?.['email']">Enter valid Email.</span>
+               </div>  
+             </div>        
+ 
+             <div class="mb-1">
+               <label for="phone_number" class="form-label">Phone Number</label>
+               <input type="tel" class="form-control" formControlName="phone_number" id="phone_number" placeholder="Enter your number" required>
+               <div class="text-danger" *ngIf="userForm.controls['phone_number'].invalid && (isFormSubmitted || userForm.controls['phone_number'].touched || userForm.controls['phone_number'].dirty)">
+                 <span *ngIf="userForm.controls['phone_number'].errors?.['required']">Phone Number Is Required</span>
+                 <span *ngIf="userForm.controls['phone_number'].errors?.['pattern']">Phone Number must be equal 11 digit</span>
+                 
+               </div>  
+             </div>
+       </div>
+       <div class="d-flex justify-content-evenly">
+ 
+             <div class="mb-1">
+               <label for="password" class="form-label">Password</label>
+               <input type="password" class="form-control" formControlName="password" id="password" placeholder="Enter your password" required>
+               <div class="text-danger" *ngIf="userForm.controls['password'].invalid && (isFormSubmitted || userForm.controls['password'].touched || userForm.controls['password'].dirty)">
+                 <span *ngIf="userForm.controls['password'].errors?.['required']">Password Is Required</span>
+                 <span *ngIf="userForm.controls['password'].errors?.['minlength']">Password must be at least 9 characters long.</span>
+               </div>           
+             </div>
+       
+             <div class="mb-1">
+               <label for="territory" class="form-label">Territory</label>
+               <input type="text" class="form-control" formControlName="territory" id="territory" placeholder="Enter your territory" required>
+               <div class="text-danger" *ngIf="userForm.controls['territory'].invalid && (isFormSubmitted || userForm.controls['territory'].touched || userForm.controls['territory'].dirty)">
+                 <span *ngIf="userForm.controls['territory'].errors?.['required']">Territory Is Required</span>
+               </div>        
+             </div>
+         </div>
+         <div class="d-flex justify-content-evenly">
+ 
+             <div class="mb-1">
+               <label for="state" class="form-label">State</label>
+               <input type="text" class="form-control" formControlName="state" id="state" placeholder="Enter your state" required>
+               <div class="text-danger" *ngIf="userForm.controls['state'].invalid && (isFormSubmitted || userForm.controls['state'].touched || userForm.controls['state'].dirty)">
+                 <span *ngIf="userForm.controls['state'].errors?.['required']">State Is Required</span>
+               </div>        
+             </div>
+ 
+             <div class="mb-1">
+               <label for="image" class="form-label">Image</label>
+               <input type="file" class="form-control" id="image" (change)="onFileChange($event)" name="image" style="width: 200px;" required>
+               <div class="text-danger" *ngIf="isFormSubmitted && !userForm.controls['image'].value">
+                <span>Image is required.</span>
+              </div>
+              </div>
+           </div>
+           <div class="d-flex justify-content-evenly">
+      
+ 
+             <div class="mb-1">
+               <label for="city" class="form-label">City</label>
+               <input type="text" class="form-control" formControlName="city" id="city" placeholder="Enter your city" required>
+               <div class="text-danger" *ngIf="userForm.controls['city'].invalid && (isFormSubmitted || userForm.controls['city'].touched || userForm.controls['city'].dirty)">
+                 <span *ngIf="userForm.controls['city'].errors?.['required']">City Is Required</span>
+               </div>   
+             </div>
+ 
+             <div class="mb-1">
+               <label for="street" class="form-label">Street</label>
+               <input type="text" class="form-control" formControlName="street" id="street" placeholder="Enter your street" required>
+               <div class="text-danger" *ngIf="userForm.controls['street'].invalid && (isFormSubmitted || userForm.controls['street'].touched || userForm.controls['street'].dirty)">
+                 <span *ngIf="userForm.controls['street'].errors?.['required']">Street Is Required</span>
+               </div>            
+             </div>
+           </div>
+ 
+         <div class="d-grid">
+           <button type="submit" class="btn custom-button text-center" [disabled]="userForm.invalid">Register</button>
+         </div>
+ 
+         
+       </form>
+     </div>
+   </div>
+ </div>
+ </div>
+ <div class="background"></div>
+ 

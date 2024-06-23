@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="navbar">
+    <div class="logo d-flex">
+      <img src="assets/images/first_logo.svg" alt="RepAlert" width="50" height="50"/>
+      <h4 class="logo_text">RepAlert</h4>
+    </div>
+    <span class="spacer"></span>
+    <button mat-button>Plan</button>
+    <button mat-button [routerLink]="['../user/sales']">Sales</button>
+    <button mat-button [routerLink]="['../user/list-All-Doctors']">Doctor's List</button>
+    <button mat-button [routerLink]="['../user/userLocation']" >Map</button>
+    <span class="spacer"></span>
+    
+    <div class="user-profile">
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+        <span>{{ first_name }}</span>
+      </button>
+      <mat-icon>arrow_drop_down</mat-icon>
+
+    <div *ngIf="!loading && first_name ">
+      <span>{{ first_name }}</span> 
+    </div>
+    <div *ngIf="!loading && !first_name ">
+      User data not available.
+    </div>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Profile</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

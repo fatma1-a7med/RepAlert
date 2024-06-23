@@ -1,0 +1,213 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow-y: hidden;
+}
+
+
+.container {
+  max-width: 470px;
+  padding: 0 20px;
+  margin: 230px auto;
+  position: relative;
+  left: 25rem;
+  bottom: 2rem;
+  height: 100%;
+}
+
+
+.logo .logo_text{
+  margin-left: 3px;
+  margin-top: 12px;
+  font-family: "Lobster Two", sans-serif;
+   font-weight: 700;
+   font-style: normal;
+  font-size: 29px;
+  color: #1CA4AC;
+
+}
+.forgetPss a{
+  color: #1CA4AC;
+}
+
+.card {
+  border-radius: 10px;
+  color: black;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  height: 69vh;
+}
+
+.loginRoute {
+  color: #1CA4AC;
+  text-decoration: none;
+}
+
+div > .form-control {
+  background-color: #f3f4f6 !important;
+  color: black !important;
+}
+
+input::placeholder {
+  color: #bdc1ca !important;
+}
+
+input:focus {
+  color: black !important;
+  background: #fff !important;
+}
+
+.card-header {
+  background-color: rgba(17, 13, 13, 0.9);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+.custom-button {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #fff;
+  background: #1CA4AC;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px #1CA4AC, 0px 0px 2px #1CA4AC;
+  transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+  color: #fff;
+  background: #1CA4AC;
+}
+
+.custom-button:active {
+  background: rgba(17, 13, 13, 0.9);
+}
+
+.custom-button:disabled {
+  opacity: 0.4;
+}
+
+.rectangle {
+  position: absolute;
+  top: 286px;
+  left: 32px;
+  width: 179px;
+  height: 8px;
+  background: #1CA4AC;
+  border-radius: 4px;
+}
+
+#coffee {
+  position: absolute;
+  top: 190px;
+  left: 151px;
+  width: 60px;
+  height: 60px;
+}
+
+.background {
+  position: fixed;
+  top: 500px;
+  left: -100px;
+  width: 130vh;
+  height: 90vh;
+  max-width: 800px;
+  max-height: 400px;
+  background-color: #1CA4AC;
+  border-radius: 50%;
+}
+
+.first_para {
+  position: absolute;
+  top: 210px;
+  left: 295px;
+  width: 370px;
+  font-size: 43px;
+  font-weight: 400;
+  color: #9095a1;
+}
+
+.second_para {
+  position: absolute;
+  top: 260px;
+  left: 295px;
+  width: 348px;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #9095a1;
+}
+
+@media (max-width: 992px) {
+  .container {
+    left: 0;
+    margin: 20px auto;
+  }
+
+  .first_para, .second_para {
+    position: static;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .first_para {
+    font-size: 30px;
+    width: auto;
+  }
+
+  .second_para {
+    font-size: 12px;
+    width: auto;
+  }
+
+  .rectangle, #coffee {
+    background-color: #fff;
+
+    position: static;
+    margin: 10px auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    left: 0;
+    margin: 20px auto;
+  }
+
+  .background {
+    width: 100%;
+    height: 50%;
+  }
+
+  .first_para {
+    font-size: 24px;
+    width: auto;
+  }
+
+  .second_para {
+    font-size: 12px;
+    width: auto;
+  }
+
+  .rectangle, #coffee {
+    position: static;
+    margin: 10px auto;
+  }
+}

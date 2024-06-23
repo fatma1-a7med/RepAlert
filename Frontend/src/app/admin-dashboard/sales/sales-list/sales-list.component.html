@@ -1,0 +1,65 @@
+<div class="container">
+
+
+<!-- <div class="mb-3">
+  <input type="text" class="form-control" placeholder="Search by Product Name" [(ngModel)]="searchTerm" (input)="filterSales()">
+</div> -->
+<div class="mb-4 mt-5 m-auto text-center">
+  
+  <select class="form-select w-50 m-auto text-center" [(ngModel)]="selectedUserId" (change)="filterSalesByUser()">
+    <option value="" selected disabled >Search by User</option>
+    <option *ngFor="let user of users" [value]="user.id">{{ user.first_name}} {{user.last_name}}</option>
+  </select>
+</div>
+
+<div class="d-flex justify-content-between mb-3">
+  <div>
+    <h3>Sales List</h3>
+    <hr class=" custom-hr">
+  </div>
+<div >
+  <a routerLink="../sales/add" class="add-sale-btn">
+    <mat-icon class="custom-add-icon">add_circle</mat-icon> 
+  </a></div>
+</div>
+
+<div *ngIf="userWithNoSalesMessage" class="alert alert-info">
+  {{ userWithNoSalesMessage }}
+</div>
+
+<div *ngIf="sales.length > 0">
+
+<table class="table table-striped custom-table">
+  <thead>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Total Units / Target Units </th>
+      <th scope="col">Unit Price / Target Unit Price  </th>
+      <th scope="col">Total Price / Total Target Price  </th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sale of sales">
+      <td>{{ sale.product_name }}</td>
+      <td>{{ sale.total_units }} / {{sale.target_units}}</td>
+      <td>{{ sale.unit_price  }} / {{sale.unit_target_price }}</td>
+      <td>{{ sale.total_actual_price   }} / {{sale.total_target_price  }}</td>
+      <td>
+        <a [routerLink]="['../sales/details', sale.sales_id ]" >
+          <mat-icon class="custom-info-icon">visibility</mat-icon>
+        </a>
+        <a [routerLink]="['../sales/edit', sale.sales_id ]" >
+          <mat-icon class="custom-edit-icon">edit</mat-icon>
+        </a>
+        <button  (click)="deleteSale(sale.sales_id)" style="border:none; outline:none;background: none;">
+          <mat-icon class="custom-delete-icon">delete</mat-icon>
+        </button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>

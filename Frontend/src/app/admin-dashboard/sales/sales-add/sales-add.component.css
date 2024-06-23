@@ -1,0 +1,20 @@
+form {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    border-radius: 10px;
+  }
+
+  .btn-primary {
+    background-color: #1CA4AC; 
+    border-color: #1CA4AC; 
+  }
+
+  .btn-primary:hover {
+    background-color: #0C728C;
+    border-color: #0C728C; 
+  }
+.custom-hr {
+    border-top: 3px solid #1CA4AC; 
+    width: 31%; 
+   margin-top: -.3rem;
+  }
