@@ -189,6 +189,45 @@ public function recent()
     
 
 
+ /**
+     * Get the latest 6 visits.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function latestVisits()
+    {
+        $latestVisits = Visit::orderBy('created_at', 'desc')
+                             ->take(6)
+                             ->with(['doctors', 'user', 'location']) 
+                             ->get();
+    
+        $result = $latestVisits->map(function ($visit) {
+            return [
+                'id' => $visit->id,
+                'visit_date' => $visit->visit_date,
+                'visit_time' => $visit->visit_time,
+                'status' => $visit->status,
+                'medical_rep_fullname' => $visit->user->first_name . ' ' . $visit->user->last_name,
+                'doctor' => $visit->doctors->map(function ($doctor) {
+                    return [
+                        'doctor_name' => $doctor->first_name . ' ' . $doctor->last_name,
+                        'specialization' => $doctor->specialization,
+                        'class_rate' => $doctor->class_rate,
+
+                    ];
+                }),
+                'tools' => $visit->doctors->flatMap(function ($doctor) {
+                    return $doctor->tools->map(function ($tool) {
+                        return [
+                            'tool_name' => $tool->name,
+                        ];
+                    });
+                }),
+            ];
+        });
+    
+        return response()->json($result);
+    }
 
 
 }

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SalesController extends Controller
 {
@@ -31,10 +34,26 @@ class SalesController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
+        $adminId = Auth::guard('sanctum')->user()->id;
 
-        $sale = Sale::create($request->all());
+ 
+    
+        $sale = Sale::create([
+            'admin_id' => $adminId, 
+            'user_id' => $request->user_id,
+            'total_units' => $request->total_units,
+            'unit_price' => $request->unit_price,
+            'target_units' => $request->target_units,
+            'unit_target_price' => $request->unit_target_price,
+            'total_target_price' => $request->total_target_price,
+            'total_actual_price' => $request->total_actual_price,
+            'product_name' => $request->product_name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
 
         return response()->json($sale, 201);
+
     }
 
     // Display the specified resource
@@ -60,7 +79,19 @@ class SalesController extends Controller
             'end_date' => 'required|date',
         ]);
 
-        $sale->update($request->all());
+        $sale->update([
+            'admin_id' => Auth::id(),  
+            'user_id' => $request->user_id,
+            'total_units' => $request->total_units,
+            'unit_price' => $request->unit_price,
+            'target_units' => $request->target_units,
+            'unit_target_price' => $request->unit_target_price,
+            'total_target_price' => $request->total_target_price,
+            'total_actual_price' => $request->total_actual_price,
+            'product_name' => $request->product_name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
 
         return response()->json($sale);
     }
@@ -78,5 +109,14 @@ class SalesController extends Controller
 
     return response()->json($sales);
 }
+
+// Fetch all users
+public function getUsers()
+{
+    $users = User::all();
+    return response()->json($users);
+}
+
+
 }
 

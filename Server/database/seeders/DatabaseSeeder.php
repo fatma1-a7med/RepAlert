@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\DoctorTool;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,13 +21,15 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // AdminsTableSeeder::class,
-            UsersTableSeeder::class,
-            // LocationsTableSeeder::class,
-            DoctorsTableSeeder::class,
-            // VisitsTableSeeder::class,
-            // ToolsTableSeeder::class,
-            // SalesTableSeeder::class
+             //AdminsTableSeeder::class,
+            //UsersTableSeeder::class,
+             //LocationsTableSeeder::class,
+           // DoctorsTableSeeder::class,
+             //ToolsTableSeeder::class,
+             //SalesTableSeeder::class,
+             VisitsTableSeeder::class,
+             DoctorsToolsSeeder::class,
+             DoctorsVisitsSeeder::class
 
         ]);
 

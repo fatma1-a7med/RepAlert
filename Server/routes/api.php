@@ -58,7 +58,7 @@ Route::prefix('admin')->group(function () {
     Route::get('visits', [VisitController::class, 'index']);
     Route::get('/visit/{id}', [VisitController::class, 'getVisitInformationById']);
     Route::get('visits/searchByUsername/{username}', [VisitController :: class, 'searchByUsername' ]);
-    Route::get('visits/searchByDateRange/{startDate}/{endDate}', [VisitController::class, 'searchByDateRange']);
+    Route::get('visits/searchByDateRange/{startDate}/{endDate}', [VisitController::class, 'searchByDateRange']); 
 
     //admin location tracking
     Route::get('/location',[LoctionController::class,'index']);
@@ -80,7 +80,7 @@ Route::prefix('user')->group(function () {
     Route::middleware('auth:sanctum')->post('/logout', [UserAuthController::class, 'logoutUser']);
     Route::middleware('auth:sanctum')->get('/sales', [\App\Http\Controllers\Users_Controllers\salesController::class, 'index']);
     Route::middleware('auth:sanctum')->get('/sales/{id}', [\App\Http\Controllers\Users_Controllers\salesController::class, 'show']);
-
+ 
 
     //doctor Routes
     Route::post('add-doctor', [doctorController:: class, 'AddDoctor']);
@@ -90,6 +90,7 @@ Route::prefix('user')->group(function () {
     Route::put('update-doctor-byId/{id}', [doctorController:: class, 'update']);
     Route::get('search/{username}', [doctorController:: class, 'search']);
 
+    Route::get('visits/latest-visits', [VisitController::class, 'latestVisits']); 
 
 });
 

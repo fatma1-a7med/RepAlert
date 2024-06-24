@@ -116,6 +116,10 @@ export class SalesService {
     deleteDoctor(id:number): Observable <any>{
       return this.http.delete<any>(`${this.baseUrl}/delete-doctor-byId/${id}`)
     }
-  
+    
+    getLatestVisits(): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/visits/latest-visits`);
+    }
+    
 }
 

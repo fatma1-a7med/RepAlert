@@ -1,13 +1,61 @@
-<div class="container">
-    <div class="text-section text-center">
-      <h1>Empowering Medical<br> Reps Effectively</h1>
-      <p>Efficiency, Connectivity, Precision</p>
-      <button class="start-button w-100">Start Now</button>
-    </div>
-    <div class="image-section">
-      <img src="assets/images/Asset2.png"  alt="Medical Reps" />
-    </div>
+<div class="container my-5 d-flex">
+  <div class="text-section text-center">
+    <h1>Empowering Medical<br>Reps Effectively</h1>
+    <p>Efficiency, Connectivity, Precision</p>
+    <button class="btn btn-primary start-button w-100">Start Now</button>
   </div>
-  
+  <div class="image-section text-center my-4">
+    <img src="assets/images/Asset2.png" class="img-fluid" alt="Medical Reps" />
+  </div>
+</div>
 
-   
+<div class="container latest-visits-container">
+  <h2 class="latest-visits-heading">Latest Visits</h2>
+  <hr class=" custom-hr text-center"/>
+
+
+  <div id="latestVisitsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner m-auto">
+      <div *ngFor="let visitsChunk of chunkedVisits; let i = index" class="carousel-item" [class.active]="i === activeIndex">
+        <div class="row">
+          <div *ngFor="let visit of visitsChunk" class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-body">
+                <span *ngFor="let doctor of visit.doctor; let d = index">
+                  {{ visit.id }}
+               
+                <h5 class="card-title">{{ doctor.doctor_name }}</h5>
+                <p class="card-text lead"><b>Doctor Specialization : </b>{{ doctor.specialization }}</p>
+                <p class="card-text lead"><b>Doctor Rate : </b>{{ doctor.class_rate }}</p>
+
+              </span><br>
+                <p class="card-text lead"><b>Visit Date: </b>{{ visit.visit_date }}</p>
+                <p class="card-text lead"><b>Visit Time: </b>{{ visit.visit_time }}</p>
+                <p class="card-text lead"><b>Status: </b>{{ visit.status }}</p>
+                <p class="card-text lead"><b>Medical Rep: </b>{{ visit.medical_rep_fullname }}</p>
+             
+                
+                <p class="card-text"><b>Tools:</b>
+                  <span *ngFor="let tool of visit.tools; let t = index">
+                    {{ tool.tool_name }}
+                    <span *ngIf="t < visit.tools.length - 1">, </span>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel navigation controls -->
+    <button class="carousel-control-prev" type="button" (click)="previous()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" (click)="next()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

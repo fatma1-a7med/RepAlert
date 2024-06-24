@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\consol;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use App\Mail\UserCreated;
 use App\Http\Controllers\Admin;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     /**
@@ -49,42 +50,47 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
         ]);
     
-// Check if the request contains an image file
-if ($request->hasFile('image')) {
-    // Get the uploaded image file
-    $image = $request->file('image');
-
-        // Generate a unique name for the image
-           $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-         // Store the image file in the public/images directory
-        $image->move(public_path('images'), $imageName);
-
-      // Store the image path in the validated data array
-       $validatedData['image'] = $imageName;
-    }
+        // Check if the request contains an image file
+        if ($request->hasFile('image')) {
+            // Get the uploaded image file
+            $image = $request->file('image');
+    
+            // Generate a unique name for the image
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+    
+            // Store the image file in the public/images directory
+            $image->move(public_path('images'), $imageName);
+    
+            // Store the image path in the validated data array
+            $validatedData['image'] = $imageName;
+        }
     
         // Create the user with the validated data
-        $user = User::create($validatedData);
-
-
-         // Send email to the newly created user
-         Mail::to($user->email)->send(new UserCreated($user));
+        $originalPassword = $request->password;
+        $user = User::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'state' => $validatedData['state'],
+            'city' => $validatedData['city'],
+            'street' => $validatedData['street'],
+            'phone_number' => $validatedData['phone_number'],
+            'territory' => $validatedData['territory'],
+            'image' => $validatedData['image'] ?? null,
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
     
-         return response()->json([
-             'status' => true,
-             'message' => 'User Created Successfully',
-             'user' => $user,
-             'token' => $user->createToken("API_TOKEN")->plainTextToken
-         ], 200);
+        // Send email to the newly created user
+        Mail::to($user->email)->send(new UserCreated($user, $originalPassword));
     
-        // Append the full URL of the image to the response
-        // $user->image_url = asset('storage/images/' . $imageName);
-    
-        // Return a JSON response with a success message
-        // return response()->json(['message' => 'User created successfully', 'data' => $user], 201);
+        return response()->json([
+            'status' => true,
+            'message' => 'User Created Successfully',
+            'user' => $user,
+            'token' => $user->createToken("API_TOKEN")->plainTextToken
+        ], 200);
     }
-    
+
     
 
     /**

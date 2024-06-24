@@ -10,10 +10,16 @@ export class AdminDashboardService {
   private usersUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
-  
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); 
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
     //sales
     getSales(): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}/sales`);
+      return this.http.get<any>(`${this.baseUrl}/sales`,{ headers: this.getAuthHeaders() });
     }
   
     getSale(id: number): Observable<any> {
@@ -39,7 +45,9 @@ export class AdminDashboardService {
     getSalesByUserId(userId: number): Observable<any[]> {
       return this.http.get<any[]>(`${this.baseUrl}/users/${userId}/sales`);
     }
-
+    me(): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/me`, { headers: this.getAuthHeaders() });
+    }
     //visit
     getAllVisits(): Observable<any> {
       return this.http.get<any>(`${this.baseUrl}/AllVisits`);

@@ -26,7 +26,7 @@
             <td>{{ sale.total_actual_price | currency }}</td>
             <td>{{ sale.total_target_price | currency }}</td>
             <td>
-              <a [routerLink]="'../sales/details/' + sale.sales_id">
+              <a [routerLink]="'../../user/sales/details/' + sale.sales_id">
                 <mat-icon class="custom-info-icon">visibility</mat-icon>
               </a>
             </td>

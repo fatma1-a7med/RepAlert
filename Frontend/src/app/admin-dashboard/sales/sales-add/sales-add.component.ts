@@ -27,12 +27,24 @@ export class SalesAddComponent {
     created_at: new Date(),
     updated_at: new Date()
   };
-
+  users: any[] = [];
   constructor(private salesService: AdminDashboardService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.salesService.getUsers().subscribe(users => {
+      this.users = users;
+    });
+
+    this.salesService.me().subscribe(admin => {
+      this.sale.admin_id = admin.admin.id;
+      console.log('Admin ID set to:', this.sale.admin_id);
+    });
+  }
 
   addSale(): void {
     this.salesService.createSale(this.sale).subscribe(() => {
       this.router.navigate(['admin-dashboard/sales']);
     });
+
   }
 }
