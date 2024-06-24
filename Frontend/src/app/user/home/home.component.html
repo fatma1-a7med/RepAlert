@@ -8,37 +8,32 @@
     <img src="assets/images/Asset2.png" class="img-fluid" alt="Medical Reps" />
   </div>
 </div>
-
 <div class="container latest-visits-container">
   <h2 class="latest-visits-heading">Latest Visits</h2>
-  <hr class=" custom-hr text-center"/>
-
+  <hr class="custom-hr text-center"/>
 
   <div id="latestVisitsCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner m-auto">
+    <div class="carousel-inner">
       <div *ngFor="let visitsChunk of chunkedVisits; let i = index" class="carousel-item" [class.active]="i === activeIndex">
         <div class="row">
           <div *ngFor="let visit of visitsChunk" class="col-md-4">
             <div class="card mb-3">
               <div class="card-body">
-                <span *ngFor="let doctor of visit.doctor; let d = index">
-                  {{ visit.id }}
-               
-                <h5 class="card-title">{{ doctor.doctor_name }}</h5>
-                <p class="card-text lead"><b>Doctor Specialization : </b>{{ doctor.specialization }}</p>
-                <p class="card-text lead"><b>Doctor Rate : </b>{{ doctor.class_rate }}</p>
-
-              </span><br>
                 <p class="card-text lead"><b>Visit Date: </b>{{ visit.visit_date }}</p>
                 <p class="card-text lead"><b>Visit Time: </b>{{ visit.visit_time }}</p>
                 <p class="card-text lead"><b>Status: </b>{{ visit.status }}</p>
-                <p class="card-text lead"><b>Medical Rep: </b>{{ visit.medical_rep_fullname }}</p>
-             
-                
-                <p class="card-text"><b>Tools:</b>
-                  <span *ngFor="let tool of visit.tools; let t = index">
+                <p class="card-text"><b>Doctors: </b><br> </p>
+                <ul *ngFor="let doctor of visit.doctor" >
+               
+                  <li class="card-text lead">{{ doctor.doctor_name }} Doctor - {{ doctor.specialization }} Specialization -  {{ doctor.class_rate }} Rate</li><br>
+                  
+                </ul>
+               
+
+                <p class="card-text text_tools"><b>Tools:</b>
+                  <span *ngFor="let tool of visit.tools; let last = last" class="lead">
                     {{ tool.tool_name }}
-                    <span *ngIf="t < visit.tools.length - 1">, </span>
+                    <span *ngIf="!last">, </span>
                   </span>
                 </p>
               </div>

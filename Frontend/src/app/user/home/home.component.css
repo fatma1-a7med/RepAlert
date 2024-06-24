@@ -101,12 +101,17 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  height: 60vh;
-  width: 25vw;
+  height: 90vh;
+  width: 27vw;
   margin-top: 3rem;
+  margin-left: 4rem;
+ 
 }
 .card:first-child {
-  margin-left: -340px;
+  margin-left: -460px;
+}
+.card:nth-child(2) {
+  margin-left: 230px;
 }
 .card:hover {
   transform: translateY(-6px);
@@ -128,6 +133,9 @@
   font-size: 1.1rem;
   color: #666;
   text-align: left;
+}
+.text_tools{
+margin-top: -1rem;
 }
 
 .row {

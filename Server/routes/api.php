@@ -46,7 +46,7 @@ Route::prefix('admin')->group(function () {
     
     //sales
     Route::apiResource('sales', SalesController::class);
-    // Route::get('users/{user}/sales', [SalesController::class,'user_sales']);
+    Route::get('users/{user}/sales', [SalesController::class,'user_sales']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('me', [AdminAuthController::class, 'me']);

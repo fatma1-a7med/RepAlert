@@ -5,18 +5,18 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  standalone:true,
-  imports:[CommonModule,FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
 
+export class HomeComponent implements OnInit {
   latestVisits: any[] = [];
   chunkedVisits: any[][] = [];
   activeIndex = 0;
 
-  constructor(private visitService: SalesService) { }
+  constructor(private visitService: SalesService) {}
 
   ngOnInit(): void {
     this.loadLatestVisits();
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.visitService.getLatestVisits().subscribe(
       (data) => {
         this.latestVisits = data;
-        this.chunkedVisits = this.chunkArray(this.latestVisits, 2);
+        this.chunkedVisits = this.chunkArray(this.latestVisits, 2); // Chunk into groups of 2
         console.log('Latest Visits:', this.latestVisits);
         console.log('Chunked Visits:', this.chunkedVisits);
       },

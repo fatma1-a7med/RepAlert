@@ -38,17 +38,21 @@ export class SalesListComponent implements OnInit {
       this.users = users;
     });
   }
-
   filterSalesByUser(): void {
     console.log('Selected User ID:', this.selectedUserId);
     console.log('Users:', this.users);
   
     if (this.selectedUserId) {
+      // Log before making the API call to ensure selectedUserId is correct
+      console.log('Fetching sales for user:', this.selectedUserId);
+      
       this.salesService.getSalesByUserId(this.selectedUserId).subscribe(sales => {
         console.log('Sales:', sales);
         this.sales = sales;
         this.userWithNoSalesMessage = sales.length === 0 ? `No sales yet ${this.getUserFullName(this.selectedUserId)}` : '';
         console.log('User With No Sales Message:', this.userWithNoSalesMessage);
+      }, error => {
+        console.error('Error fetching sales:', error);
       });
     } else {
       this.loadSales(); // Reload all sales if no user selected

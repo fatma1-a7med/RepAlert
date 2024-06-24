@@ -19,7 +19,7 @@ export class AdminDashboardService {
   }
     //sales
     getSales(): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}/sales`,{ headers: this.getAuthHeaders() });
+      return this.http.get<any>(`${this.baseUrl}/sales`);
     }
   
     getSale(id: number): Observable<any> {
