@@ -38,7 +38,7 @@ export class UserLocationComponent implements OnInit {
     }).addTo(this.map);
 
     this.marker = L.marker([latitude, longitude]).addTo(this.map);
-    this.marker.bindPopup("you are here").openPopup();
+    this.marker.bindPopup("You are here").openPopup();
   }
 
   watchPosition(): void {
@@ -46,14 +46,14 @@ export class UserLocationComponent implements OnInit {
       const coords = position.coords;
       console.log(`lat: ${coords.latitude}, lon: ${coords.longitude}`);
 
-      // Update map marker position
       this.marker.setLatLng([coords.latitude, coords.longitude]);
       this.map.setView([coords.latitude, coords.longitude]);
 
-      // Fetch user ID and save location
       this.userService.getCurrentUserId().subscribe(
         (response) => {
           const userId = response.user_id;
+          console.log(`Removing old location and saving new location for user ${userId}`);
+
           this.locationService.saveLocation(userId, coords.latitude, coords.longitude)
             .subscribe(
               () => {
@@ -72,11 +72,10 @@ export class UserLocationComponent implements OnInit {
       console.log(error);
     }, {
       enableHighAccuracy: true,
-      timeout: 900000, 
+      timeout: 900000,
       maximumAge: 0
     });
   }
-
 
   }
 

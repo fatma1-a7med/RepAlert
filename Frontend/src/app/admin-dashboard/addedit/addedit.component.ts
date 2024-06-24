@@ -161,6 +161,7 @@ export class AddeditComponent implements OnInit {
       email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
+    
   }
 
   ngOnInit(): void {

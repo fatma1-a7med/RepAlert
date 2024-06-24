@@ -71,7 +71,7 @@ export const routes: Routes = [
 
         //user salles
         {path:'sales',component:ListAllSalesComponent},
-        {path:'sales/details/:id',component:SalesDetailsComponent}
+        {path:'sales/details/:id',component:SalesUserDetailsComponent}
     
       ]
     },

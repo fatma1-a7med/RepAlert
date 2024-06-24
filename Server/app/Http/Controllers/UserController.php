@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\UserCreated;
 use App\Http\Controllers\Admin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
@@ -66,8 +67,13 @@ class UserController extends Controller
         }
     
         // Create the user with the validated data
+        if (!isset($validatedData['admin_id'])) {
+            $validatedData['admin_id'] = Auth::id();
+        }
+
         $originalPassword = $request->password;
         $user = User::create([
+            'admin_id' =>$validatedData['admin_id'],
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
             'state' => $validatedData['state'],
@@ -78,6 +84,8 @@ class UserController extends Controller
             'image' => $validatedData['image'] ?? null,
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
+            'birthDate' => $validatedData['birthDate'],
+            'gender' => $validatedData['gender']
         ]);
     
         // Send email to the newly created user

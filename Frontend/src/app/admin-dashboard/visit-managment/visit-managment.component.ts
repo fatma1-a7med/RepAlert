@@ -23,7 +23,7 @@ export class VisitManagementComponent implements OnInit {
   constructor(private http: HttpClient, private datePipe: DatePipe, private visitServices: AdminAuthServiceService) { }
 
   ngOnInit(): void {
-    this.loadInitialData()
+    this.loadInitialData();
   }
 
   loadInitialData() {
@@ -37,8 +37,6 @@ export class VisitManagementComponent implements OnInit {
         }
       );
   }
-
-
 
   searchByDateRange() {
     if (this.startDate && this.endDate) {
@@ -79,8 +77,13 @@ export class VisitManagementComponent implements OnInit {
     }
   }
   
-  getDoctorNames(doctors: any[]) {
-    return doctors.map(doctor => doctor.doctor_name).join(', ');
+  getDoctorNames(doctors: any) {
+    console.log('Doctors:', doctors); // Check what `doctors` object contains
+    if (doctors && doctors.doctor_name) {
+      return doctors.doctor_name;
+    } else {
+      return ''; // Or handle it according to your application logic
+    }
   }
 
   getToolNames(tools: any[]) {
@@ -90,10 +93,10 @@ export class VisitManagementComponent implements OnInit {
   showVisitDetails(visitId: number) {
     this.http.get<any>(`http://localhost:8000/api/admin/visit/${visitId}`)
       .subscribe(
-        (data: any) => {
+        data => {
           this.selectedVisit = data;
         },
-        (error) => {
+        error => {
           console.error('Error fetching visit details:', error);
         }
       );

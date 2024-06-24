@@ -17,6 +17,7 @@ class LoctionController extends Controller
         // Map locations to include user name
         $locations = $locations->map(function ($location) use ($users) {
             $location['first_name'] = $users[$location->user_id]->first_name;
+            $location['last_name'] = $users[$location->user_id]->last_name;
             return $location;
         });
         return response()->json($locations);
@@ -30,6 +31,10 @@ class LoctionController extends Controller
             'longitude' => 'required|numeric',
         ]);
 
+        // Remove old location for the user
+        Location::where('user_id', $request->user_id)->delete();
+
+        // Save the new location
         $location = Location::create($request->all());
 
         return response()->json($location, 201);

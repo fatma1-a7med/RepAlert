@@ -44,9 +44,9 @@ export class LocationComponent {
     this.userMarkers = {};
 
     locations.forEach(location => {
-      const { latitude, longitude, first_name, user_id } = location;
+      const { latitude, longitude, first_name,last_name, user_id } = location;
       const marker = L.marker([latitude, longitude]).addTo(this.map);
-      marker.bindPopup(`<b>${first_name}</b>`).openPopup();
+      marker.bindPopup(`<b>${first_name} ${last_name}</b>`).openPopup();
       this.userMarkers[user_id] = marker;
     });
   }

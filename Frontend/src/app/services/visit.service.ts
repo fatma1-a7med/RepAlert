@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,8 +13,15 @@ export class VisitService {
 
   constructor(private http: HttpClient) { }
 
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); 
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
   getMedreplist(): Observable<any> {
-    return this.http.get(`${this.uURL}/users`); // Endpoint for fetching the user list
+    return this.http.get(`${this.uURL}/users`, { headers: this.getAuthHeaders() }); // Endpoint for fetching the user list
   }
 
   getVisits(): Observable<any> {

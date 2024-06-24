@@ -45,13 +45,15 @@ Route::prefix('admin')->group(function () {
     Route::post('password/reset/{token}', [ResetPasswordAdminController::class, 'reset'])->name('password.reset');
     
     //sales
-    Route::apiResource('sales', SalesController::class);
-    Route::get('users/{user}/sales', [SalesController::class,'user_sales']);
-
+  
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('me', [AdminAuthController::class, 'me']);
         Route::post('logout', [AdminAuthController::class, 'logout']);
         Route::get('logged-in-admin', [AdminAuthController::class, 'getLoggedInAdmin']);
+
+        Route::apiResource('sales', SalesController::class);
+        Route::get('users/{user}/sales', [SalesController::class,'user_sales']);
+    
     });
 
     //admin visit routes
@@ -94,7 +96,7 @@ Route::prefix('user')->group(function () {
 
 });
 
-Route::prefix('users')->group(function () {
+Route::prefix('users')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [UserController::class, 'index']);         // GET /api/users
     Route::post('/', [UserController::class, 'store']);        // POST /api/users
     Route::get('/{id}', [UserController::class, 'show']);      // GET /api/users/{id}

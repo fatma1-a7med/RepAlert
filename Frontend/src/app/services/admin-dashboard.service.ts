@@ -19,31 +19,31 @@ export class AdminDashboardService {
   }
     //sales
     getSales(): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}/sales`);
+      return this.http.get<any>(`${this.baseUrl}/sales`, { headers: this.getAuthHeaders() });
     }
   
     getSale(id: number): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}/sales/${id}`);
+      return this.http.get<any>(`${this.baseUrl}/sales/${id}`, { headers: this.getAuthHeaders() });
     }
   
     createSale(sale: any): Observable<any> {
-      return this.http.post<any>(`${this.baseUrl}/sales`, sale);
+      return this.http.post<any>(`${this.baseUrl}/sales`, sale, { headers: this.getAuthHeaders() });
     }
   
     updateSale(id: number, sale: any): Observable<any> {
-      return this.http.put<any>(`${this.baseUrl}/sales/${id}`, sale);
+      return this.http.put<any>(`${this.baseUrl}/sales/${id}`, sale, { headers: this.getAuthHeaders() });
     }
   
     deleteSale(id: number): Observable<any> {
-      return this.http.delete<any>(`${this.baseUrl}/sales/${id}`);
+      return this.http.delete<any>(`${this.baseUrl}/sales/${id}`, { headers: this.getAuthHeaders() });
     }
-
+  
     getUsers(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.usersUrl}/users`);
+      return this.http.get<any[]>(`${this.usersUrl}/users`, { headers: this.getAuthHeaders() });
     }
   
     getSalesByUserId(userId: number): Observable<any[]> {
-      return this.http.get<any[]>(`${this.baseUrl}/users/${userId}/sales`);
+      return this.http.get<any[]>(`${this.baseUrl}/users/${userId}/sales`, { headers: this.getAuthHeaders() });
     }
     me(): Observable<any> {
       return this.http.get<any>(`${this.baseUrl}/me`, { headers: this.getAuthHeaders() });

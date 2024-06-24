@@ -13,14 +13,14 @@ class CreateVisitsTable extends Migration
             $table->time('visit_time');
             $table->string('purpose');
             $table->enum('status', ['planned', 'completed', 'canceled']);
-            $table->unsignedBigInteger('med_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('location_id');
             $table->timestamps();
 
             // Foreign key constraints
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
-            $table->foreign('med_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }

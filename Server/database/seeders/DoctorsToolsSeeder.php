@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\DoctorTool;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\DoctorsTools;
+use App\Models\DoctorTool;
 
 class DoctorsToolsSeeder extends Seeder
 {
@@ -13,8 +13,6 @@ class DoctorsToolsSeeder extends Seeder
      */
     public function run(): void
     {
-        DoctorTool::factory()
-        ->count(10) 
-        ->create();
+        DoctorTool::factory()->count(10)->create();
     }
 }

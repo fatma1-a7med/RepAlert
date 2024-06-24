@@ -22,7 +22,7 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'admin_id' => 'required|exists:admins,id',
+            // 'admin_id' => 'required|exists:admins,id',
             'user_id' => 'required|exists:users,id',
             'total_units' => 'required|integer',
             'unit_price' => 'required|numeric',
@@ -34,12 +34,16 @@ class SalesController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
-        $adminId = Auth::guard('sanctum')->user()->id;
+        $user = Auth::guard('sanctum')->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
 
  
     
         $sale = Sale::create([
-            'admin_id' => $adminId, 
+            'admin_id' => $user->id, 
             'user_id' => $request->user_id,
             'total_units' => $request->total_units,
             'unit_price' => $request->unit_price,
@@ -66,7 +70,7 @@ class SalesController extends Controller
     public function update(Request $request, Sale $sale)
     {
         $request->validate([
-            'admin_id' => 'required|exists:admins,id',
+            // 'admin_id' => 'required|exists:admins,id',
             'user_id' => 'required|exists:users,id',
             'total_units' => 'required|integer',
             'unit_price' => 'required|numeric',
@@ -79,8 +83,13 @@ class SalesController extends Controller
             'end_date' => 'required|date',
         ]);
 
+        $user = Auth::guard('sanctum')->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
         $sale->update([
-            'admin_id' => Auth::id(),  
+            'admin_id' => $user->id, 
             'user_id' => $request->user_id,
             'total_units' => $request->total_units,
             'unit_price' => $request->unit_price,

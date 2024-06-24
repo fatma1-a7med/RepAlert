@@ -7,21 +7,18 @@ use App\Models\DoctorVisit;
 use App\Models\Visit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DoctorsVisitsFactory extends Factory
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DoctorsTools>
+ */
+class DoctorvisitFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = DoctorVisit::class;
-
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'doctor_id' => Doctor::factory(),  // Assuming you have a Doctor factory

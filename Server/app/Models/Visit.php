@@ -17,16 +17,16 @@ class Visit extends Model
         'location_id',
     ];
 
-    public function doctors()
+    public function doctor()
     {
-        return $this->belongsToMany(Doctor::class, 'doctors_visits');
+        return $this->belongsTo(Doctor::class);
     }
-
+    
     public function user()
     {
-        return $this->belongsTo(User::class, 'med_id');
+        return $this->belongsTo(User::class);
     }
-
+    
     public function location()
     {
         return $this->belongsTo(Location::class);

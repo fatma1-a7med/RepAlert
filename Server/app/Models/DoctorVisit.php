@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class DoctorVisit extends Pivot
 {
+    use HasFactory;
     protected $table = 'doctors_visits';
 
     protected $fillable = [

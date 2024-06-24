@@ -89,16 +89,16 @@ console.log(data)
     }
   }
 
-  deletemedrip(id:number){
-    this._medrepservice.deletemedrip(id).subscribe({
-      next:(res) => {
+  deletemedrip(id: number) {
+    if (confirm('Are you sure you want to delete this Medrep?')) {
+      this._medrepservice.deletemedrip(id).subscribe({
+        next: (res) => {
           alert('Medrep deleted successfully');
           this.getMedreplist();
-      },
-      error:console.log,
-
-
-    })
+        },
+        error: console.log,
+      });
+    }
   }
 
 
