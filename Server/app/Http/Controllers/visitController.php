@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VisitController extends Controller
 {
@@ -173,7 +174,10 @@ public function recent()
      */
     public function latestVisits()
 {
-    $latestVisits = Visit::orderBy('created_at', 'desc')
+    $user = Auth::user();
+    
+    $latestVisits = Visit::where('user_id', $user->id)
+                         ->orderBy('created_at', 'desc')
                          ->take(6)
                          ->with(['doctor', 'user', 'location']) 
                          ->get();

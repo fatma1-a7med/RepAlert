@@ -92,7 +92,7 @@ Route::prefix('user')->group(function () {
     Route::put('update-doctor-byId/{id}', [doctorController:: class, 'update']);
     Route::get('search/{username}', [doctorController:: class, 'search']);
 
-    Route::get('visits/latest-visits', [VisitController::class, 'latestVisits']); 
+    Route::middleware('auth:sanctum')->get('visits/latest-visits', [VisitController::class, 'latestVisits']); 
 
 });
 

@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
   chunkArray(array: any[], chunkSize: number): any[][] {
     const result = [];
     for (let i = 0; i < array.length; i += chunkSize) {

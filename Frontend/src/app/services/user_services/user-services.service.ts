@@ -118,7 +118,11 @@ export class SalesService {
     }
     
     getLatestVisits(): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}/visits/latest-visits`);
+      const headers = this.getAuthHeaders();
+      return this.http.get<any>(`${this.baseUrl}/visits/latest-visits`, { headers })
+        .pipe(
+          catchError(this.handleError)
+        );
     }
     
 }
