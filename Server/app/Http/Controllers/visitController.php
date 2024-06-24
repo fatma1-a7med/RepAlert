@@ -172,39 +172,34 @@ public function recent()
      * @return \Illuminate\Http\JsonResponse
      */
     public function latestVisits()
-    {
-        $latestVisits = Visit::orderBy('created_at', 'desc')
-                             ->take(6)
-                             ->with(['doctors', 'user', 'location']) 
-                             ->get();
-    
-        $result = $latestVisits->map(function ($visit) {
-            return [
-                'id' => $visit->id,
-                'visit_date' => $visit->visit_date,
-                'visit_time' => $visit->visit_time,
-                'status' => $visit->status,
-                'medical_rep_fullname' => $visit->user->first_name . ' ' . $visit->user->last_name,
-                'doctor' => $visit->doctors->map(function ($doctor) {
-                    return [
-                        'doctor_name' => $doctor->first_name . ' ' . $doctor->last_name,
-                        'specialization' => $doctor->specialization,
-                        'class_rate' => $doctor->class_rate,
+{
+    $latestVisits = Visit::orderBy('created_at', 'desc')
+                         ->take(6)
+                         ->with(['doctor', 'user', 'location']) 
+                         ->get();
 
-                    ];
-                }),
-                'tools' => $visit->doctors->flatMap(function ($doctor) {
-                    return $doctor->tools->map(function ($tool) {
-                        return [
-                            'tool_name' => $tool->name,
-                        ];
-                    });
-                }),
-            ];
-        });
-    
-        return response()->json($result);
-    }
+    $result = $latestVisits->map(function ($visit) {
+        return [
+            'id' => $visit->id,
+            'visit_date' => $visit->visit_date,
+            'visit_time' => $visit->visit_time,
+            'status' => $visit->status,
+            'medical_rep_fullname' => $visit->user->first_name . ' ' . $visit->user->last_name,
+            'doctor' => [
+                'doctor_name' => $visit->doctor->first_name . ' ' . $visit->doctor->last_name,
+                'specialization' => $visit->doctor->specialization,
+                'class_rate' => $visit->doctor->class_rate,
+            ],
+            'tools' => $visit->doctor->tools->map(function ($tool) {
+                return [
+                    'tool_name' => $tool->name,
+                ];
+            }),
+        ];
+    });
+
+    return response()->json($result);
+}
 
 
 }

@@ -17,17 +17,20 @@ interface User {
   city?: string;
 }
 
+interface Location {
+  name: string;
+  street: string;
+  state: string;
+  city: string;
+}
+
 interface VisitReport {
   visit_date: string;
   visit_time: string;
-  location: {
-    name: string;
-    street: string;
-    state: string;
-    city: string;
-  };
+  location: Location;
   doctors: User[];
   purpose: string;
+  user: User; // Add user to the interface
 }
 
 @Component({
@@ -61,6 +64,7 @@ export class ReportingComponent implements OnInit {
       }
     });
     this.doctors = Array.from(doctorSet);
+    console.log('Unique doctors extracted:', this.doctors);
   }
 
   filterByDoctor(doctorId: string): void {

@@ -22,13 +22,8 @@
                 <p class="card-text lead"><b>Visit Date: </b>{{ visit.visit_date }}</p>
                 <p class="card-text lead"><b>Visit Time: </b>{{ visit.visit_time }}</p>
                 <p class="card-text lead"><b>Status: </b>{{ visit.status }}</p>
-                <p class="card-text"><b>Doctors: </b><br> </p>
-                <ul *ngFor="let doctor of visit.doctor" >
-               
-                  <li class="card-text lead">{{ doctor.doctor_name }} Doctor - {{ doctor.specialization }} Specialization -  {{ doctor.class_rate }} Rate</li><br>
-                  
-                </ul>
-               
+                <p class="card-text"><b>Doctor: </b><br> </p>
+                <p class="card-text lead">{{ visit.doctor.doctor_name }} - {{ visit.doctor.specialization }} - {{ visit.doctor.class_rate }} Rate</p>
 
                 <p class="card-text text_tools"><b>Tools:</b>
                   <span *ngFor="let tool of visit.tools; let last = last" class="lead">
