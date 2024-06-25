@@ -44,7 +44,8 @@
 
 .image-section img {
   max-width: 100%;
-  height: auto;
+  height: 80vh;
+  margin-top: -3rem;
 }
 
 /* Latest Visits section */
@@ -155,11 +156,13 @@ margin-top: -1rem;
   background-color: #1CA4AC;
   color: white;
   text-align: center;
+  white-space: nowrap;
 }
 
 .custom-table td {
   border-color: #1CA4AC; 
   text-align: center;
+  white-space: nowrap;
 }
 
 .custom-table tr:nth-child(even) {

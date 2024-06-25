@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { JarwisService } from '../../services/jarwis.service';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forgetpassword',
@@ -37,11 +38,19 @@ export class ForgetpasswordComponent implements OnInit {
     if (this.forgotPasswordForm.valid) {
       this.authService.sendResetLink(this.forgotPasswordForm.value.email).subscribe(
         response => {
-          window.alert('Reset link sent to your email successfully.');
-        },
+          Swal.fire({
+            title: 'Success!',
+            text: 'Reset link sent to your email successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });        },
         error => {
-          window.alert('Error sending reset link.');
-        }
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error sending reset link.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });        }
       );
     }
   }

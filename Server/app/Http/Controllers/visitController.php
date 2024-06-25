@@ -10,7 +10,7 @@ class VisitController extends Controller
 {
     public function index()
     {
-        $visits = Visit::with(['doctor', 'user', 'location', 'doctor.tools'])->get();
+        $visits = Visit::with(['doctor', 'user', 'location', 'tools'])->get();
     
         $result = $visits->map(function ($visit) {
             return [
@@ -22,7 +22,7 @@ class VisitController extends Controller
                     'doctor_name' => $visit->doctor->first_name . ' ' . $visit->doctor->last_name,
                 ],
                 // Assuming you need to manually fetch tools related to doctors
-                'tools' => $visit->doctor->tools->map(function ($tool) {
+                'tools' => $visit->tools->map(function ($tool) {
                     return [
                         'tool_name' => $tool->name,
                     ];
@@ -34,7 +34,7 @@ class VisitController extends Controller
     }
 
     public function getVisitInformationById($id) {
-        $visit = Visit::with(['doctor', 'location', 'user'])->find($id);
+        $visit = Visit::with(['doctor', 'location', 'user', 'tools'])->find($id);
     
         if (!$visit) {
             return response()->json(['message' => 'Visit not found'], 404);
@@ -54,7 +54,7 @@ class VisitController extends Controller
             'state' => $doctor->state,
             'location_info' => $visit->location,
             'user_full_name' => $visit->user->first_name . ' ' . $visit->user->last_name,
-            'tools' => $doctor->tools->map(function ($tool) {
+            'tools' => $visit->tools->map(function ($tool) {
                 return [
                     'tool_name' => $tool->name,
                 ];

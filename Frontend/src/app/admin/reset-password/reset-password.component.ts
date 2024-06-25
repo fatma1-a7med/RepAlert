@@ -5,7 +5,7 @@ import { JarwisService } from '../../services/jarwis.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reset-password',
@@ -34,13 +34,12 @@ export class ResetPasswordComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: ['', [Validators.required]],
-      token: ['']  
+      token: ['']
     });
   }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params['token'];
-   
     this.resetPasswordForm.patchValue({ token: this.token });
     console.log(this.token);
   }
@@ -50,15 +49,33 @@ export class ResetPasswordComponent implements OnInit {
       const { email, password, password_confirmation, token } = this.resetPasswordForm.value;
       this.authService.resetPassword(token, email, password, password_confirmation).subscribe(
         response => {
-          window.alert('Reset password successfully.');
-          // Redirect to login page after successful password reset
-          this.router.navigate(['/admin/login']);
+          Swal.fire({
+            title: 'Success!',
+            text: 'Reset password successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            // Redirect to login page after successful password reset
+            this.router.navigate(['/admin/login']);
+          });
         },
         error => {
-          this.message = 'Error resetting password.';
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error resetting password.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
           console.error(error);
         }
       );
+    } else {
+      Swal.fire({
+        title: 'Validation Error!',
+        text: 'Please fill in all required fields with valid information.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
     }
   }
 }

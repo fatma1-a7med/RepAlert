@@ -14,6 +14,8 @@
   }
   
   .dropdown select {
+    width: 70%;
+    text-align: center;
     padding: 7px 57px;
     font-size: 16px;
     margin-right: 10px;
@@ -47,9 +49,9 @@
     margin: 10px;
     border: 9px solid rgb(212, 212, 217); /* Blue border */
     border-radius: 2px;
-    max-width: 400px;
+    max-width: 800px;
     width: 100%;
-    text-align: left;
+    text-align: center;
   }
   
   .visit-detail {
@@ -86,3 +88,11 @@
    margin-top: -.2rem;
   }
   
+  .custom-table {
+    border: 1px solid #1CA4AC;
+    border-collapse: collapse;
+  }
+  .custom-table th,
+  .custom-table td {
+    border: 1px solid #1CA4AC;
+  }

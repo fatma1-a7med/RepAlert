@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sales-list',
@@ -100,18 +101,41 @@ export class SalesListComponent implements OnInit {
   }
 
   deleteSale(saleId: number): void {
-    if (confirm('Are you sure you want to delete this sale?')) {
-      this.salesService.deleteSale(saleId).subscribe(() => {
-        this.sales = this.sales.filter(sale => sale.sales_id !== saleId);
-        this.filteredSales = this.filteredSales.filter(sale => sale.sales_id !== saleId);
-        this.dataSource.data = this.filteredSales;
-        this.totalSales = this.sales.length;
-        this.applyPaginator();
-      }, error => {
-        console.error('Error deleting sale:', error);
-      });
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to delete this sale?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.salesService.deleteSale(saleId).subscribe(() => {
+          this.sales = this.sales.filter(sale => sale.sales_id !== saleId);
+          this.filteredSales = this.filteredSales.filter(sale => sale.sales_id !== saleId);
+          this.dataSource.data = this.filteredSales;
+          this.totalSales = this.sales.length;
+          this.applyPaginator();
+          Swal.fire(
+            'Deleted!',
+            'The sale has been deleted.',
+            'success'
+          );
+          this.loadSales();
+          this.loadUsers();
+        }, error => {
+          console.error('Error deleting sale:', error);
+          Swal.fire(
+            'Error!',
+            'An error occurred while deleting the sale.',
+            'error'
+          );
+        });
+      }
+    });
   }
+  
 
   getUserFullName(userId: number): string {
     const user = this.users.find(u => u.id === userId);

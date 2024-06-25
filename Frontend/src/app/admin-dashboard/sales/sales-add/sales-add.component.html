@@ -1,15 +1,13 @@
-<div class="container my-4 ml-5">
-
-  <form (ngSubmit)="addSale()" class="needs-validation w-50 m-auto custom-form" novalidate >
+<div class="container">
+  <form (ngSubmit)="addSale()" class="needs-validation m-auto custom-form" [class.was-validated]="formSubmitted" novalidate>
     <h3>Add new Sales</h3>
-    <hr class=" custom-hr">
-    <div class="row ">
+    <hr class="custom-hr">
+    <div class="row mt-2">
       <div class="col-md-6">
-    
         <div class="form-group mb-3">
           <label for="user_id">User</label>
           <select id="user_id" class="form-select" [(ngModel)]="sale.user_id" name="user_id" required>
-            <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{user.last_name}}</option>
+            <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}</option>
           </select>
           <div class="invalid-feedback">
             User is required.
@@ -22,7 +20,6 @@
             Unit Price is required.
           </div>
         </div>
-        
         <div class="form-group mb-3">
           <label for="total_units">Total Units</label>
           <input type="number" id="total_units" class="form-control" [(ngModel)]="sale.total_units" name="total_units" required>
@@ -30,8 +27,6 @@
             Total Units is required.
           </div>
         </div>
-
-       
         <div class="form-group mb-3">
           <label for="start_date">Start Date</label>
           <input type="date" id="start_date" class="form-control" [(ngModel)]="sale.start_date" name="start_date" required>
@@ -39,7 +34,7 @@
             Start Date is required.
           </div>
         </div>
-        <div class="form-group mb-3" >
+        <div class="form-group mb-3">
           <label for="product_name">Product Name</label>
           <input type="text" id="product_name" class="form-control" [(ngModel)]="sale.product_name" name="product_name" required>
           <div class="invalid-feedback">
@@ -47,7 +42,6 @@
           </div>
         </div>
       </div>
-
       <div class="col-md-6">
         <div class="form-group mb-3">
           <label for="unit_target_price">Unit Target Price</label>
@@ -56,8 +50,6 @@
             Unit Target Price is required.
           </div>
         </div>
-
-       
         <div class="form-group mb-3">
           <label for="target_units">Target Units</label>
           <input type="number" id="target_units" class="form-control" [(ngModel)]="sale.target_units" name="target_units" required>
@@ -72,11 +64,6 @@
             Total Actual Price is required.
           </div>
         </div>
-
-        
-       
-        
-
         <div class="form-group mb-3">
           <label for="end_date">End Date</label>
           <input type="date" id="end_date" class="form-control" [(ngModel)]="sale.end_date" name="end_date" required>
@@ -84,8 +71,6 @@
             End Date is required.
           </div>
         </div>
-
-      
         <div class="form-group mb-3">
           <label for="total_target_price">Total Target Price</label>
           <input type="number" id="total_target_price" class="form-control" [(ngModel)]="sale.total_target_price" name="total_target_price" required>
@@ -94,13 +79,19 @@
           </div>
         </div>
       </div>
-        
-
-
     </div>
-
-    <button type="submit" class="btn btn-primary mt-3 w-100">Add </button>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary mt-3 w-100">Add</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <button type="button" class="btn btn-secondary mt-3 w-100" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
   </form>
   <br><br>
 </div>
-

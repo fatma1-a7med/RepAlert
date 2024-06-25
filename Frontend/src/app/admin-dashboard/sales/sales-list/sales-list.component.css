@@ -21,6 +21,7 @@
   
   .custom-table td {
     border-color: #1CA4AC; 
+    text-align: center;
   }
   
   .custom-table tr:nth-child(even) {
@@ -50,6 +51,7 @@
   
   .custom-edit-icon {
     color: #ffc107;
+    margin-left: 9px;
   }
   
   .custom-delete-icon {

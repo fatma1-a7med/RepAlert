@@ -81,7 +81,7 @@ export class SalesService {
     return this.http.post(`${this.baseUrl}/logout`, {}, { headers }).subscribe(
       () => {
         localStorage.removeItem('token');
-        this.router.navigate(['/user/login']);
+        this.router.navigate(['/']);
       },
       (error) => {
         console.error('Logout failed', error);
