@@ -1,0 +1,72 @@
+/* Ensure overall page layout and positioning */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Wrapper for fixed sidebar and content */
+  .wrapper {
+    position: relative; /* Ensure relative positioning for z-index context */
+    display: flex;
+    height: 100%;
+  }
+  
+  /* Fixed position sidebar */
+  app-side-bar {
+    position: fixed;
+    left: 0;
+    top: 60px; /* Adjust to match navbar height */
+    bottom: 0;
+    width: 210px; /* Adjust sidebar width */
+    background-color: #1CA4AC;
+    z-index: 1000; /* Ensure sidebar is above content */
+    padding-top: 60px; /* Adjust according to navbar height */
+  }
+  
+  /* Fixed position navbar */
+  app-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* Adjust navbar height */
+    background-color: #333; /* Example background color */
+    z-index: 1000; /* Ensure navbar is above content */
+  }
+  
+  /* Content area to accommodate fixed navbar and sidebar */
+  .content {
+    padding: 20px;
+    position: relative; /* Ensure relative positioning for z-index context */
+    z-index: 1; /* Ensure content is below navbar and sidebar */
+  }
+  
+  /* Example: Adjustments for responsiveness */
+  @media screen and (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+    }
+  
+    app-side-bar {
+      width: 100%;
+      height: auto;
+      padding-top: 60px;
+      z-index: 1000;
+    }
+  
+    .content {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    app-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+  }
+  

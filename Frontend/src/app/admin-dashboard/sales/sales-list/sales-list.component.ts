@@ -1,26 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminDashboardService } from '../../../services/admin-dashboard.service';
-import { FormsModule } from '@angular/forms';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-sales-list',
   standalone:true,
-  imports:[FormsModule,CommonModule,RouterLink,MatIconModule],
+  imports:[CommonModule,FormsModule,RouterLink , MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule],
   templateUrl: './sales-list.component.html',
   styleUrls: ['./sales-list.component.css']
 })
 export class SalesListComponent implements OnInit {
+  dataSource = new MatTableDataSource<any>();
   sales: any[] = [];
+  filteredSales: any[] = [];
   users: any[] = [];
-  selectedUserId: number = 0;
+  selectedUserId?: number;
   userWithNoSalesMessage: string = '';
-  selectedUser: any | undefined; 
-  
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  totalSales: number = 0;
+  displayedColumns: string[] = ['product_name', 'percentageDifferenceUnits', 'percentageDifferencePrice', 'percentageDifferenceActualPrice', 'actions'];
 
-  constructor(private salesService: AdminDashboardService) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private salesService: AdminDashboardService) {}
 
   ngOnInit(): void {
     this.loadSales();
@@ -30,6 +48,11 @@ export class SalesListComponent implements OnInit {
   loadSales(): void {
     this.salesService.getSales().subscribe(data => {
       this.sales = data;
+      this.filteredSales = data;
+      this.totalSales = this.sales.length;
+      this.dataSource.data = this.sales;
+      this.applyPaginator();
+      this.calculatePercentageDifference();
     });
   }
 
@@ -38,39 +61,85 @@ export class SalesListComponent implements OnInit {
       this.users = users;
     });
   }
+
   filterSalesByUser(): void {
-    console.log('Selected User ID:', this.selectedUserId);
-    console.log('Users:', this.users);
-  
     if (this.selectedUserId) {
-      // Log before making the API call to ensure selectedUserId is correct
-      console.log('Fetching sales for user:', this.selectedUserId);
-      
       this.salesService.getSalesByUserId(this.selectedUserId).subscribe(sales => {
-        console.log('Sales:', sales);
         this.sales = sales;
-        this.userWithNoSalesMessage = sales.length === 0 ? `No sales yet ${this.getUserFullName(this.selectedUserId)}` : '';
-        console.log('User With No Sales Message:', this.userWithNoSalesMessage);
+        this.filteredSales = sales;
+        this.userWithNoSalesMessage = sales.length === 0 ? `No sales yet.` : '';
+        this.totalSales = this.sales.length;
+        this.dataSource.data = this.sales;
+        this.applyPaginator();
+        this.calculatePercentageDifference();
+
       }, error => {
         console.error('Error fetching sales:', error);
       });
     } else {
-      this.loadSales(); // Reload all sales if no user selected
+      this.loadSales();
     }
   }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    if (filterValue) {
+      this.filteredSales = this.sales.filter(sale =>
+        sale.product_name.toLowerCase().includes(filterValue)
+      );
+      this.dataSource.data = this.filteredSales;
+      this.totalSales = this.filteredSales.length;
+      this.userWithNoSalesMessage = this.totalSales === 0 ? `No sales matched the filter.` : '';
+    } else {
+      this.filteredSales = this.sales;
+      this.dataSource.data = this.filteredSales;
+      this.totalSales = this.sales.length;
+      this.userWithNoSalesMessage = '';
+    }
+    this.applyPaginator();
+  }
+
   deleteSale(saleId: number): void {
     if (confirm('Are you sure you want to delete this sale?')) {
       this.salesService.deleteSale(saleId).subscribe(() => {
-        // Remove the sale from the array
         this.sales = this.sales.filter(sale => sale.sales_id !== saleId);
+        this.filteredSales = this.filteredSales.filter(sale => sale.sales_id !== saleId);
+        this.dataSource.data = this.filteredSales;
+        this.totalSales = this.sales.length;
+        this.applyPaginator();
       }, error => {
         console.error('Error deleting sale:', error);
-        // Handle error scenario, e.g., show an error message
       });
     }
   }
+
   getUserFullName(userId: number): string {
     const user = this.users.find(u => u.id === userId);
     return user ? `${user.first_name} ${user.last_name}` : '';
+  }
+
+  applyPaginator(): void {
+    if (this.paginator) {
+      this.paginator.firstPage();
+      this.paginator.length = this.totalSales;
+    }
+  }
+
+  onPageChange(event: PageEvent): void {
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    this.dataSource.data = this.filteredSales.slice(startIndex, endIndex);
+  }
+
+  calculatePercentageDifference(): void {
+    this.sales.forEach(sale => {
+      sale.percentageDifferenceUnits = this.calculatePercentage(sale.total_units, sale.target_units);
+      sale.percentageDifferencePrice = this.calculatePercentage(sale.unit_price, sale.unit_target_price);
+      sale.percentageDifferenceActualPrice = this.calculatePercentage(sale.total_actual_price, sale.total_target_price);
+    });
+  }
+
+  calculatePercentage(total: number, target: number): number {
+    return ((total) / target) * 100;
   }
 }

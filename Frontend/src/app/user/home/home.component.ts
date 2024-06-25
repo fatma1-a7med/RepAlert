@@ -1,53 +1,84 @@
-import { Component, OnInit } from '@angular/core';
-import { SalesService } from '../../services/user_services/user-services.service'; // Adjust the correct path to your service
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+
+import { SalesService } from '../../services/user_services/user-services.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  selector: 'app-latest-visits',
+  standalone:true,
+  imports: [
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-
 export class HomeComponent implements OnInit {
-  latestVisits: any[] = [];
-  chunkedVisits: any[][] = [];
-  activeIndex = 0;
+  displayedColumns: string[] = ['visit_date', 'visit_time', 'status', 'doctor_name', 'specialization', 'class_rate', 'tools'];
+  dataSource: MatTableDataSource<any>;
+  visits: any[] = [];
 
-  constructor(private visitService: SalesService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {
-    this.loadLatestVisits();
+  constructor(private userService: SalesService) {
+    this.dataSource = new MatTableDataSource<any>(); 
   }
 
-  loadLatestVisits() {
-    this.visitService.getLatestVisits().subscribe(
-      (data) => {
-        this.latestVisits = data;
-        this.chunkedVisits = this.chunkArray(this.latestVisits, 2); // Chunk into groups of 2
-        console.log('Latest Visits:', this.latestVisits);
-        console.log('Chunked Visits:', this.chunkedVisits);
+  ngOnInit(): void {
+    this.fetchVisits();
+  }
+
+  fetchVisits() {
+    this.userService.getLatestVisits().subscribe(
+      (response: any[]) => {
+        this.visits = response.map(visit => ({
+          ...visit,
+          doctor_name: visit.doctor.doctor_name,
+          specialization: visit.doctor.specialization,
+          class_rate: visit.doctor.class_rate
+        }));
+        this.dataSource.data = this.visits; 
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
-      (error) => {
-        console.error('Error fetching latest visits:', error);
+      error => {
+        console.error('Error fetching visits:', error);
       }
     );
   }
-  chunkArray(array: any[], chunkSize: number): any[][] {
-    const result = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-      result.push(array.slice(i, i + chunkSize));
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    if (filterValue.length === 0) {
+      // If the filter is empty, reset the filtered data to original data
+      this.dataSource.data = this.visits;
+    } else {
+      // Filter the data
+      this.dataSource.filterPredicate = (data: any, filter: string) => {
+        const doctorName = data.doctor_name.toLowerCase();
+        return doctorName.includes(filter);
+      };
+      this.dataSource.filter = filterValue;
     }
-    return result;
-  }
 
-  next() {
-    this.activeIndex = (this.activeIndex + 1) % this.chunkedVisits.length;
-  }
-
-  previous() {
-    this.activeIndex = (this.activeIndex - 1 + this.chunkedVisits.length) % this.chunkedVisits.length;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

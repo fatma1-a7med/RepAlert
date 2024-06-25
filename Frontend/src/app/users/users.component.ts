@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../user/navbar/navbar.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [HeaderComponent,FooterComponent,RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })

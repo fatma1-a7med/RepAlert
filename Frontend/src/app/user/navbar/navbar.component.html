@@ -13,8 +13,8 @@
     
     <div class="user-profile">
       <button mat-button [matMenuTriggerFor]="userMenu">
-        <mat-icon>account_circle</mat-icon>
-        <span>{{ first_name }}</span>
+        <img [src]="getImageUrl()" alt="User Image" class="user-image" />
+        <span>{{ first_name }} {{ last_name }}</span> 
       </button>
       <mat-icon>arrow_drop_down</mat-icon>
 

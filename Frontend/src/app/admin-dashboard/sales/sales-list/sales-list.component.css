@@ -3,7 +3,14 @@
   width: 77vw;
 }
 
-.custom-table {
+.mat-mdc-input-element custom-mat-form-field mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored{
+  max-height: 20px !important; /* Adjust the height as needed */
+}
+.custom-mat-form-field {
+  background-color: white; /* Replace with your desired background color */
+}
+
+  .custom-table {
     border: 1px solid #1CA4AC;
   }
   
@@ -13,8 +20,7 @@
   }
   
   .custom-table td {
-    border-color: #1CA4AC;
-    text-align: center;
+    border-color: #1CA4AC; 
   }
   
   .custom-table tr:nth-child(even) {
@@ -25,35 +31,35 @@
     background-color: #e6f7f8;
   }
   
-  .custom-table .btn-info {
-    background-color: #1CA4AC;
-    border-color: #1CA4AC;
+  .mat-icon {
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
   }
   
-  .custom-table .btn-info:hover {
-    background-color: #139b9f;
-    border-color: #139b9f;
+  .custom-add-icon {
+    font-size: 35px;
+    margin-right: 8px;
+    color: #1CA4AC;
+    vertical-align: middle;
   }
   
-  .custom-table .btn-primary {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  .custom-info-icon {
+    color: #28a745;
   }
   
-  .custom-table .btn-primary:hover {
-    background-color: #004494;
-    border-color: #004494;
+  .custom-edit-icon {
+    color: #ffc107;
   }
   
-  .custom-table .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
+  .custom-delete-icon {
+    color: #d40505;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
   }
   
-  .custom-table .btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-  }
   
 
   .mat-icon {
@@ -62,25 +68,7 @@
     line-height: 35px;
   }
 
-  .custom-add-icon {
-    font-size: 35px;
-    margin-right: 8px; 
-    color: #1CA4AC; 
-    vertical-align: middle; 
-  }
-  .custom-info-icon{
-    color: #28a745;
-  }
-  .custom-edit-icon{
-    color: #ffc107;
-  }
-  .custom-delete-icon{
-    color: #d40505; 
-  border: none; 
-  background: none; 
-  outline: none; 
-  cursor: pointer;
-  }
+  
   .custom-hr {
     border-top: 3px solid #1CA4AC; 
     width: 100%; 
