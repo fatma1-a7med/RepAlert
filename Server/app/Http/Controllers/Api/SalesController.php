@@ -14,10 +14,16 @@ class SalesController extends Controller
     // Display a listing of the resource
     public function index()
     {
-        $sales = Sale::all();
+        $user = Auth::guard('sanctum')->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        // Retrieve sales for the logged-in admin
+        $sales = Sale::where('admin_id', $user->id)->get();
         return response()->json($sales);
     }
-
     // Store a newly created resource in storage
     public function store(Request $request)
     {

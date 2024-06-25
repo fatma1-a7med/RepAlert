@@ -17,6 +17,7 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
+            'admin_id' => \App\Models\Admin::factory(),
             'user_id' => \App\Models\User::factory(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
