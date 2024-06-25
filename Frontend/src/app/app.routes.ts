@@ -31,6 +31,7 @@ import { ListDoctorsComponent } from './users/doctors/list-doctors/list-doctors.
 import { AddDoctorComponent } from './users/doctors/add-doctor/add-doctor.component';
 import { ShowDoctorComponent } from './users/doctors/show-doctor/show-doctor.component';
 import { AdminGuard } from './services/auth/admin-auh-guard.guard';
+import { UservisitComponent } from './users/uservisit/uservisit.component';
 
 
 
@@ -71,8 +72,12 @@ export const routes: Routes = [
 
         //user salles
         {path:'sales',component:ListAllSalesComponent},
-        {path:'sales/details/:id',component:SalesUserDetailsComponent}
-    
+        {path:'sales/details/:id',component:SalesUserDetailsComponent},
+      
+        //user plan
+        
+        {path:'plan', component:UservisitComponent},
+
       ]
     },
   

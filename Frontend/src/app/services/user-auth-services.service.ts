@@ -21,8 +21,8 @@ export class UserAuthServicesService {
             if (response && response.token) {
                 console.log('User data:', response.user); // Log the user data to the console
                 this.saveToken(response.token); // Save the token to local storage
-                localStorage.setItem('token', response.token); // Save token to localStorage
-                localStorage.setItem('user_id', response.user.id); // Save user ID to localStorage
+                localStorage!.setItem('token', response.token); // Save token to localStorage
+                localStorage!.setItem('user_id', response.user.id); // Save user ID to localStorage
 
                 this.router.navigate(['/user/home']);
             }
@@ -36,15 +36,15 @@ export class UserAuthServicesService {
 
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage!.getItem('token');
   }
 
   isAuthenticated(): any {
     
     tap((response: any) => {
       if (response && response.token) {
-        localStorage.setItem('token', response.token); // Save token to localStorage
-        localStorage.setItem('user_id', response.user_id);
+        localStorage!.setItem('token', response.token); // Save token to localStorage
+        localStorage!.setItem('user_id', response.user_id);
         
       }
     }),
@@ -57,13 +57,13 @@ export class UserAuthServicesService {
 
 
   saveToken(token: string) {
-    localStorage.setItem('token', token);
+    localStorage!.setItem('token', token);
   }
 
  
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage!.removeItem('token');
   }
 
 
@@ -75,6 +75,6 @@ export class UserAuthServicesService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage!.getItem('token');
   }
 }

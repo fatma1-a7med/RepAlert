@@ -16,7 +16,7 @@ use App\Http\Controllers\doctorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\VisitReportingController;
-
+use App\Http\Controllers\ToolsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,8 +77,7 @@ Route::prefix('admin')->group(function () {
     Route::get('visits/planned/{user_id}', [VisitController::class, 'getPlannedVisits']);
    
     Route::get('/visits/recent', [VisitController::class, 'recent']);
-    //tools
-    Route::get('/tools', [ToolController::class, 'index']);
+   
 });
 
 Route::prefix('user')->group(function () {
@@ -106,6 +105,8 @@ Route::prefix('user')->group(function () {
     Route::post('visits', [UserVisitController::class, 'store']);
     Route::put('visits/{id}', [UserVisitController::class, 'update']);
     Route::delete('visits/{id}', [UserVisitController::class, 'delete']);
+
+    Route::get('tools' , [ToolsController::class , 'index']);
 });
 
 Route::prefix('users')->middleware('auth:sanctum')->group(function () {

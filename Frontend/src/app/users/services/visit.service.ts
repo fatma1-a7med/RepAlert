@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VisitModelTs } from '../../models/visit.model.ts';
 
@@ -11,6 +11,13 @@ export class VisitService {
   private dapiUrl = 'http://localhost:8000/api/user/get-all-doctors';
   private apiUrl = 'http://localhost:8000/api/user/visits';
   private vurl ='http://localhost:8000/api/';
+  
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); 
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
   constructor(private http: HttpClient) { }
 
   getVisits(): Observable<VisitModelTs[]> {
@@ -42,7 +49,7 @@ export class VisitService {
   }
 
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.vurl}users`);
+    return this.http.get<any[]>(`${this.vurl}users` ,  { headers: this.getAuthHeaders() }); 
   }
 
   searchDoctors(query: string): Observable<any[]> {
