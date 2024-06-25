@@ -15,7 +15,7 @@ class CreateVisitsTable extends Migration
             $table->enum('status', ['planned', 'completed', 'canceled']);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('doctor_id');
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->timestamps();
 
             // Foreign key constraints

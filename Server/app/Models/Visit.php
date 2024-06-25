@@ -15,7 +15,8 @@ class Visit extends Model
         'purpose',
         'status',
         'user_id',
-        'location_id'
+        'location_id',
+        'doctor_id'
     ];
 
     public function doctor()

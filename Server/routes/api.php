@@ -99,14 +99,12 @@ Route::prefix('user')->group(function () {
     Route::get('search/{username}', [doctorController:: class, 'search']);
 
     Route::middleware('auth:sanctum')->get('visits/latest-visits', [VisitController::class, 'latestVisits']); 
-
-
-    Route::get('visits', [UserVisitController::class, 'index']);
-    Route::get('visits/{id}', [UserVisitController::class, 'show']);
-    Route::post('visits', [UserVisitController::class, 'store']);
-    Route::put('visits/{id}', [UserVisitController::class, 'update']);
-    Route::delete('visits/{id}', [UserVisitController::class, 'delete']);
-
+    Route::middleware('auth:sanctum')->get('visits', [UserVisitController::class, 'index']);
+    Route::middleware('auth:sanctum')->get('visits/{id}', [UserVisitController::class, 'show']);
+    Route::middleware('auth:sanctum')->post('visits', [UserVisitController::class, 'store']);
+    Route::middleware('auth:sanctum')->put('visits/{id}', [UserVisitController::class, 'update']);
+    Route::middleware('auth:sanctum')->delete('visits/{id}', [UserVisitController::class, 'delete']);
+    
     Route::get('tools' , [ToolsController::class , 'index']);
 });
 
