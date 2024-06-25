@@ -1,10 +1,9 @@
 <div class="container">
   <div class="dropdown">
-    <select id="doctorSelect" #doctorSelect>
-      <option value="" disabled selected>Select a doctor</option>
-      <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.first_name }} {{ doctor.last_name }}</option>
+    <select id="userSelect" [(ngModel)]="selectedUserId" (ngModelChange)="filterByUser(selectedUserId)">
+      <option value="" disabled>Select a Medical Rep</option>
+      <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}</option>
     </select>
-    <button class="search-button" (click)="filterByDoctor(doctorSelect.value)">Search</button>
   </div>
   <div>
     <h3> Reporting </h3>
@@ -17,22 +16,54 @@
   
   <div id="visit-report-content" >
     <div *ngFor="let visit of filteredVisitReports" class="visit-report-card m-auto my-2">
-      <h5><i class="fas fa-file-alt"></i> Visit Report</h5>
-      <div class="visit-detail">
-        <p><strong>Date:</strong> {{ visit.visit_date }}</p>
-        <p><strong>Time:</strong> {{ visit.visit_time }}</p>
-        <p><strong>Location:</strong> {{ visit.doctors[0].street }}, {{ visit.doctors[0].state }}, {{ visit.doctors[0].city }}</p>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped custom-table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Field</th>
+              <th scope="col">Info</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+            <tr>
+              <td><strong>Medical rep Name</strong></td>
+              <td>{{ visit.user.first_name }} {{ visit.user.last_name }}</td>
+            </tr>
+            <tr>
+              <td><strong>Date</strong></td>
+              <td>{{ visit.visit_date  }}</td>
+            </tr>
+            <tr>
+              <td><strong>Time</strong></td>
+              <td>{{ visit.visit_time }}</td>
+            </tr>
+            <tr>
+              <td><strong>Visit Location</strong></td>
+              <td>{{ visit.doctors[0].street }}, {{ visit.doctors[0].state }}, {{ visit.doctors[0].city }}</td>
+            </tr>
+            <tr>
+              <td><strong>Doctor Name</strong></td>
+              <td>{{ visit.doctors[0].first_name }} {{ visit.doctors[0].last_name }}</td>
+            </tr>
+            <tr>
+              <td><strong>Doctor Specialization</strong></td>
+              <td>{{ visit.doctors[0].specialization }}</td>
+            </tr>
+            <tr>
+              <td><strong>Doctor Contact info</strong></td>
+              <td>{{ visit.doctors[0].phone_number }}</td>
+            </tr>
+            <tr>
+              <td><strong>Purpose of Visit</strong></td>
+              <td>{{ visit.purpose }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      
-      <h5><i class="far fa-user"></i> Healthcare Professional Details</h5>
-      <div class="visit-detail">
-        <p><strong>Name:</strong> {{ visit.doctors[0].first_name }} {{ visit.doctors[0].last_name }}</p>
-        <p><strong>Specialization:</strong> {{ visit.doctors[0].specialization }}</p>
-        <p><strong>Contact:</strong> {{ visit.doctors[0].phone_number }}</p>
-      </div>
-      
-      <h5><i class="fas fa-book-open"></i> Purpose of Visit</h5>
-      <p class="visit-detail">{{ visit.purpose }}</p>
-    </div>
   </div>
 </div>
+
+
+
+

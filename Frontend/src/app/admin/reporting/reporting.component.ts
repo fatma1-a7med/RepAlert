@@ -43,8 +43,9 @@ interface VisitReport {
 export class ReportingComponent implements OnInit {
   visitReports: VisitReport[] = [];
   filteredVisitReports: VisitReport[] = [];
-  doctors: User[] = [];
-  searchUser: string = '';
+  users: User[] = [];
+  selectedUserId: string = ''; 
+  
 
   constructor(private reportingService: ReportingService) { }
 
@@ -52,38 +53,28 @@ export class ReportingComponent implements OnInit {
     this.reportingService.getVisitReports().subscribe(data => {
       this.visitReports = data;
       this.filteredVisitReports = [...this.visitReports];
-      this.extractDoctors();
+      this.extractUsers();
     });
   }
 
-  extractDoctors(): void {
-    const doctorSet = new Set<User>();
+  extractUsers(): void {
+    const userMap = new Map<string, User>();
     this.visitReports.forEach(visit => {
-      if (visit.doctors) {
-        visit.doctors.forEach((doctor: User) => doctorSet.add(doctor));
+      if (visit.user) {
+        const userKey = `${visit.user.first_name.toLowerCase()}_${visit.user.last_name.toLowerCase()}`;
+        if (!userMap.has(userKey)) {
+          userMap.set(userKey, visit.user);
+        }
       }
     });
-    this.doctors = Array.from(doctorSet);
-    console.log('Unique doctors extracted:', this.doctors);
+    this.users = Array.from(userMap.values());
+    console.log('Unique users extracted:', this.users);
   }
 
-  filterByDoctor(doctorId: string): void {
-    if (doctorId) {
+  filterByUser(userId: string): void {
+    if (userId) {
       this.filteredVisitReports = this.visitReports.filter(visit =>
-        visit.doctors.some((doctor: User) => doctor.id.toString() === doctorId)
-      );
-    } else {
-      this.filteredVisitReports = [...this.visitReports];
-    }
-  }
-
-  applyFilter(): void {
-    if (this.searchUser.trim() !== '') {
-      this.filteredVisitReports = this.visitReports.filter(visit =>
-        visit.doctors.some((doctor: User) =>
-          doctor.first_name.toLowerCase().includes(this.searchUser.toLowerCase()) ||
-          doctor.last_name.toLowerCase().includes(this.searchUser.toLowerCase())
-        )
+        visit.user.id.toString() === userId
       );
     } else {
       this.filteredVisitReports = [...this.visitReports];
@@ -95,11 +86,24 @@ export class ReportingComponent implements OnInit {
     if (element) {
       html2canvas(element, { scale: 3 }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
-        const imgWidth = canvas.width;
-        const imgHeight = canvas.height;
-
-        const pdf = new jsPDF('p', 'pt', [imgWidth, imgHeight]);
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        const imgWidth = 595.28; // A4 size width in points
+        const pageHeight = 841.89; // A4 size height in points
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+  
+        const pdf = new jsPDF('p', 'pt', 'a4');
+        let position = 0;
+  
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+  
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+  
         pdf.save('visit-report.pdf');
       }).catch(error => {
         console.error('Error generating PDF:', error);
