@@ -172,7 +172,7 @@ export class AddVisitDialogComponent implements OnInit {
       purpose: ['', Validators.required],
       status: ['ongoing', Validators.required],
       doctorCtrl: ['', Validators.required], // Add doctorCtrl here
-      user_id: ['', Validators.required],
+    //user_id: ['',],
       tools: [[]],  // Initialize as an array
     });
 

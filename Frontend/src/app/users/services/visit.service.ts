@@ -21,11 +21,11 @@ export class VisitService {
   constructor(private http: HttpClient) { }
 
   getVisits(): Observable<VisitModelTs[]> {
-    return this.http.get<VisitModelTs[]>(`${this.apiUrl}`);
+    return this.http.get<VisitModelTs[]>(`${this.apiUrl}` ,{ headers: this.getAuthHeaders() });
   }
 
   createVisit(visit: VisitModelTs): Observable<VisitModelTs> {
-    return this.http.post<VisitModelTs>(`${this.apiUrl}`, visit);
+    return this.http.post<VisitModelTs>(`${this.apiUrl}`, visit,{ headers: this.getAuthHeaders() });
   }
 
   updateVisit(visitData: any): Observable<any> {
