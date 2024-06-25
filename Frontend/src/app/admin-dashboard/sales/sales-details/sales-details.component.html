@@ -1,41 +1,59 @@
-<div class="container mt-4" style="width: 40vw;">
-  <div class="card border-0">
-    <div class="card-body">
-      <h1 class="card-title text-center mb-4">{{ sale.product_name }}</h1>
+<div class="container mt-4">
+  <h3 class="text-center mb-4">Product Name: {{ sale.product_name }}</h3>
 
-      <div class="row mb-4">
-        <div class="col-md-6 ">
-          <div class="card bg-light border-0 ">
-            <div class="card-body small_card ">
-              <ul class="list-unstyled">
-                <li><strong>Admin ID:</strong> {{ sale.admin_id }}</li>
-                <li><strong>User ID:</strong> {{ sale.user_id }}</li>
-                <li><strong>Total Units:</strong> {{ sale.total_units }}</li>
-                <li><strong>Unit Price:</strong> {{ sale.unit_price }}</li>
-                <li><strong>Target Units:</strong> {{ sale.target_units }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-md-6" style="position: relative;top: 10rem; right: -.1rem;">
-          <div class="card bg-light border-0">
-            <div class="card-body small_card">
-              <ul class="list-unstyled">
-                <li><strong>Unit Target Price:</strong> {{ sale.unit_target_price }}</li>
-                <li><strong>Total Target Price:</strong> {{ sale.total_target_price }}</li>
-                <li><strong>Total Actual Price:</strong> {{ sale.total_actual_price }}</li>
-                <li><strong>Start Date:</strong> {{ sale.start_date }}</li>
-                <li><strong>End Date:</strong> {{ sale.end_date }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div >
-        <a routerLink="../../../../admin-dashboard/sales" class="btn btn-primary">Back to Sales List</a>
-      </div>
-    </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped custom-table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Field</th>
+          <th scope="col">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+     
+        <tr>
+          <td><strong>User Name</strong></td>
+              <td>{{ userInfo?.first_name }} {{ userInfo?.last_name }}</td>
+        </tr>
+       
+        <tr>
+          <td><strong>Unit Price</strong></td>
+          <td>{{ sale.unit_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Unit Target Price</strong></td>
+          <td>{{ sale.unit_target_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Target Units</strong></td>
+          <td>{{ sale.target_units }}</td>
+        </tr>
+       
+        <tr>
+          <td><strong>Total Units</strong></td>
+          <td>{{ sale.total_units }}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Target Price</strong></td>
+          <td>{{ sale.total_target_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Actual Price</strong></td>
+          <td>{{ sale.total_actual_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Start Date</strong></td>
+          <td>{{ sale.start_date }}</td>
+        </tr>
+        <tr>
+          <td><strong>End Date</strong></td>
+          <td>{{ sale.end_date }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div class="text-center my-4">
+    <a routerLink="../../../../admin-dashboard/sales" class="btn btn-primary">Back to Sales List</a>
+  </div><br><br>
 </div>

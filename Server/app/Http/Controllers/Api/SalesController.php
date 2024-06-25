@@ -134,6 +134,25 @@ public function getUsers()
     return response()->json($users);
 }
 
+public function getUserInfo($userId)
+{
+    $user = User::find($userId);
+
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+
+    // Optionally, you can return specific user fields as needed
+    $userData = [
+        'id' => $user->id,
+        'first_name' => $user->first_name,
+        'last_name' => $user->last_name,
+        'email' => $user->email,
+        // Add more fields as required
+    ];
+
+    return response()->json($userData);
+}
 
 }
 

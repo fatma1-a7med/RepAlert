@@ -1,49 +1,53 @@
 <div class="container mt-4">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h1 class="card-title text-center mb-4" style="color: black;">{{ sale.product_name }}</h1>
-  
-        <div class="row mb-4">
-          <div class="col-md-6">
-            <div class="card bg-light border-0">
-              <div class="card-body the-card">
-                <ul class="list-unstyled">
-                  <li><strong>Total Units: </strong><span>{{ sale.total_units }}</span> </li>
-                  <li><strong>Unit Price: </strong><span>{{ sale.unit_price | currency }}</span> </li>
-                  <li><strong>Target Units: </strong><span>{{ sale.target_units }}</span> </li>
-                  <li><strong>Admin ID: </strong><span>{{ sale.admin_id }}</span> </li>
-                  <li><strong>User ID: </strong> <span>{{ sale.user_id }}</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-6">
-            <div class="card bg-light border-0">
-              <div class="card-body the-card">
-                <ul class="list-unstyled">
-                  <li><strong>Unit Target Price: </strong><span>{{ sale.unit_target_price | currency }}</span> </li>
-                  <li><strong>Total Target Price: </strong><span>{{ sale.total_target_price | currency }}</span> </li>
-                  <li><strong>Total Actual Price: </strong><span>{{ sale.total_actual_price | currency }}</span> </li>
-                  <li><strong>Start Date: </strong><span> {{ sale.start_date | date }}</span></li>
-                  <li><strong>End Date: </strong><span>{{ sale.end_date | date }}</span> </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div >
-          <a routerLink="../../../../user/sales" class="btn btn-primary">Back to Sales List</a>
-        </div>
-      </div>
-    </div>
+  <h3 class="text-center mb-4">Product Name: {{ sale?.product_name }}</h3>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped custom-table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Field</th>
+          <th scope="col">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><strong>Unit Price</strong></td>
+          <td>{{ sale?.unit_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Unit Target Price</strong></td>
+          <td>{{ sale?.unit_target_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Target Units</strong></td>
+          <td>{{ sale?.target_units }}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Units</strong></td>
+          <td>{{ sale?.total_units }}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Target Price</strong></td>
+          <td>{{ sale?.total_target_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Actual Price</strong></td>
+          <td>{{ sale?.total_actual_price }}</td>
+        </tr>
+        <tr>
+          <td><strong>Start Date</strong></td>
+          <td>{{ sale?.start_date | date }}</td>
+        </tr>
+        <tr>
+          <td><strong>End Date</strong></td>
+          <td>{{ sale?.end_date | date }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
-  <div *ngIf="!sale" class="container text-center mt-5">
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-    <p class="mt-3">Loading...</p>
+
+  <div class="text-center my-4">
+    <a routerLink="../../../../user/sales" class="btn btn-primary">Back to Sales List</a>
   </div>
-  
+</div>

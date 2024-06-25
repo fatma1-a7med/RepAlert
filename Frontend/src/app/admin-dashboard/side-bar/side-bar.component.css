@@ -1,32 +1,55 @@
 .sidebar {
-    margin-top:60px;
-    height: 100vh;
-    width: 210px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #1CA4AC;
-    padding-top: 100px;
-    /* z-index: 1; */
+  margin-top: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 210px;
+  background-color: #1CA4AC;
+  padding-top: 100px;
+}
 
-  }
-  .sidebar a {
-    padding: 10px;
+.sidebar a {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    display: block;
-    cursor: pointer;
-  }
-  .sidebar a:hover {
-    background-color: #139b9f;
-  }
-  .main-content {
-    margin-left: 250px;
-    padding: 20px;
-  }
-  .sidebar a span{
-    margin-top: -5rem;
-    margin-left: .4rem;
-  }
+.sidebar a:hover {
+  background-color: #139b9f;
+}
+
+.sidebar a mat-icon {
+  margin-right: 10px; /* Space between icon and text */
+  font-size: 24px; /* Adjust icon size */
+  height: 24px;
+  width: 24px;
+}
+
+.sidebar a span {
+  flex-grow: 1; /* Ensures the text takes up remaining space */
+}
+
+.main-content {
+  margin-left: 210px; /* Adjust to match sidebar width */
+  padding: 20px;
+}
+
+.active-link {
+  background-color: #E26677;
+  color: white !important;
+}
+
+.material-icons {
+  font-size: 24px; /* Adjust icon size */
+  line-height: 24px; /* Center icon vertically */
+}
+
+.mat-icon {
+  height: 24px;
+  width: 24px;
+}

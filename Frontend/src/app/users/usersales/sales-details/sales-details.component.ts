@@ -13,24 +13,22 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./sales-details.component.css']
 })
 export class SalesUserDetailsComponent implements OnInit {
+  saleId: number;
   sale: any;
+  userInfo: any;
 
-  constructor(
-    private route: ActivatedRoute,
-    private salesService: SalesService
-  ) {}
+  constructor(private route: ActivatedRoute, private salesService: SalesService) {
+    this.saleId = +this.route.snapshot.paramMap.get('id')!;
+  }
 
   ngOnInit(): void {
-    const saleId = this.route.snapshot.paramMap.get('id');
-    if (saleId) {
-      this.loadSaleDetails(parseInt(saleId, 10));
-    }
+    this.loadSaleDetails(this.saleId);
   }
 
   loadSaleDetails(saleId: number) {
     this.salesService.getSaleDetails(saleId).subscribe(
-      (data) => {
-        this.sale = data.sale; // Assign the fetched sale data
+      (data: any) => {
+        this.sale = data.sale;
         console.log('Sale details:', this.sale);
       },
       (error) => {
@@ -38,4 +36,5 @@ export class SalesUserDetailsComponent implements OnInit {
       }
     );
   }
+
 }

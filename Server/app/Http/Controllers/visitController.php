@@ -194,7 +194,7 @@ public function recent()
                 'specialization' => $visit->doctor->specialization,
                 'class_rate' => $visit->doctor->class_rate,
             ],
-            'tools' => $visit->doctor->tools->map(function ($tool) {
+            'tools' => $visit->tools->map(function ($tool) {
                 return [
                     'tool_name' => $tool->name,
                 ];

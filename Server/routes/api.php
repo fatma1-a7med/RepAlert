@@ -54,8 +54,9 @@ Route::prefix('admin')->group(function () {
         Route::get('logged-in-admin', [AdminAuthController::class, 'getLoggedInAdmin']);
 
         Route::apiResource('sales', SalesController::class);
+        Route::get('sales/user-info/{userId}', [SalesController::class,'getUserInfo']);
         Route::get('users/{user}/sales', [SalesController::class,'user_sales']);
-        Route::middleware('auth:sanctum')->get('{adminId}/users', [SalesController::class,'getUsers']);
+        Route::get('{adminId}/users', [SalesController::class,'getUsers']);
 
     
     });

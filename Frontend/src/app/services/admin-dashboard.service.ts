@@ -51,6 +51,9 @@ export class AdminDashboardService {
     getUsersByAdmin(adminId: number): Observable<any[]> {
       return this.http.get<any[]>(`${this.baseUrl}/${adminId}/users`, { headers: this.getAuthHeaders() });
     }
+    getUserInfo(userId: number): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/sales/user-info/${userId}`, { headers: this.getAuthHeaders() });
+    }
     me(): Observable<any> {
       return this.http.get<any>(`${this.baseUrl}/me`, { headers: this.getAuthHeaders() });
     }

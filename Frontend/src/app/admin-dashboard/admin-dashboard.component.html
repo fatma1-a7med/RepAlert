@@ -1,6 +1,8 @@
-
-<app-navbar></app-navbar>
-<app-side-bar></app-side-bar>
-<!-- <li><a routerLink="medreps">View Medical Reps</a></li> -->
-
-<router-outlet />
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-side-bar></app-side-bar>
+    
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>

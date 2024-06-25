@@ -17,6 +17,8 @@ import { RouterLink } from '@angular/router';
 export class NavbarComponent {
   medreps: any[] = [];
   first_name:string='';
+  last_name:string='';
+  image:string='';
   loading: boolean = true; 
 
   constructor(private userService:SalesService) {}
@@ -30,12 +32,17 @@ export class NavbarComponent {
     this.userService.getCurrentUser().subscribe(
       response => {
         this.first_name = response.user.first_name;
+        this.last_name = response.user.last_name;
+        this.image = response.user.image;
         console.log('First Name:', this.first_name);
       },
       error => {
         console.error('Error:', error);
       }
     );
+  }
+  getImageUrl(): string {
+    return `http://localhost:8000/${this.image}`;
   }
   logout() {
     this.userService.logout();

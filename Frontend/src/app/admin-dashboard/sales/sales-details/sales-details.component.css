@@ -1,16 +1,8 @@
-.container{
-    height: 80vh;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.container {
+    max-width: 80%; /* Adjust the maximum width as per your design */
+   margin-left: 250px; 
+ }
 
-}
-.small_card{
-    background-color: #1CA4AC;
-    color: white;
-    border-radius: 5px;
-}
-.btn{
-    margin-top: 9rem;
-}
 .btn-primary {
     background-color: #1CA4AC;
     border-color: #1CA4AC;
@@ -20,3 +12,19 @@
     background-color: #0C728C; 
     border-color: #0C728C; 
   }
+
+  /* sale-details.component.css */
+.card-body {
+    padding: 2rem;
+  }
+  
+  .custom-table td {
+    padding: 0.75rem;
+  }
+  
+  
+  .card-title {
+    color: #333;
+  }
+ 
+  

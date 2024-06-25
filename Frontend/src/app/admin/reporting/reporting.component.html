@@ -15,8 +15,8 @@
     <button class="search-button" (click)="generatePDF()">Download PDF</button>
   </div>
   
-  <div id="visit-report-content">
-    <div *ngFor="let visit of filteredVisitReports" class="visit-report-card">
+  <div id="visit-report-content" >
+    <div *ngFor="let visit of filteredVisitReports" class="visit-report-card m-auto my-2">
       <h5><i class="fas fa-file-alt"></i> Visit Report</h5>
       <div class="visit-detail">
         <p><strong>Date:</strong> {{ visit.visit_date }}</p>
