@@ -70,7 +70,7 @@ export class UserAuthServicesService {
 
   isUser(): boolean {
     // Check if user is regular user (implement based on your logic)
-    const role = localStorage.getItem('role');
+    const role = localStorage!.getItem('role');
     return role === 'user';
   }
 
