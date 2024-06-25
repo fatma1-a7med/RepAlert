@@ -1,8 +1,10 @@
-<div class="container mt-4">
-  <h3 class="text-center mb-4">Product Name: {{ sale.product_name }}</h3>
+<div class="container">
+  <h3 class="text-center mb-3">Product Name: {{ sale.product_name }}</h3>
+  <hr class="custom-hr text-center m-auto">
+  <div class="row mt-4">
+<div class="col-md-12">
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped custom-table">
+    <table class="table table-striped table-bordered custom-table ">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Field</th>
@@ -51,8 +53,9 @@
         </tr>
       </tbody>
     </table>
-  </div>
-
+ 
+</div>
+</div>
   <div class="text-center my-4">
     <a routerLink="../../../../admin-dashboard/sales" class="btn btn-primary">Back to Sales List</a>
   </div><br><br>

@@ -1,8 +1,14 @@
+.container{
+  margin-left: 250px;
+  margin-top: 90px;
+
+}
 form {
+ 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        padding: 40px;
+    padding: 40px;
     border-radius: 10px;
-    margin-left: 23rem;
+    width: 45vw;
 
   }
   .custom-form label{

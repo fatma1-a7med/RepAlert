@@ -1,13 +1,19 @@
 .container {
-    max-width: 80%; /* Adjust the maximum width as per your design */
-   margin-left: 250px; 
+    /* Adjust the maximum width as per your design */
+   margin-left: 290px;
+   margin-top: 90px;
+   width: 70vw;
  }
 
 .btn-primary {
     background-color: #1CA4AC;
     border-color: #1CA4AC;
   }
-
+  .custom-hr {
+    border-top: 3px solid #1CA4AC; 
+    width: 27%; 
+   margin-top: -.8rem auto;
+  }
   .btn-primary:hover {
     background-color: #0C728C; 
     border-color: #0C728C; 
@@ -22,7 +28,19 @@
     padding: 0.75rem;
   }
   
+ .custom-table {
+    width: 100%; /* Ensure the table takes up the full width of its container */
+  }
   
+  .custom-table th, 
+  .custom-table td {
+    width: 50%; /* Ensure each column takes up 50% of the table width */
+  }
+  
+  .custom-table th, 
+  .custom-table td {
+    white-space: nowrap; /* Prevent text wrapping, so the table cells expand */
+  }
   .card-title {
     color: #333;
   }

@@ -3,6 +3,7 @@ import { AdminDashboardService } from '../../../services/admin-dashboard.service
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sales-add',
@@ -28,6 +29,8 @@ export class SalesAddComponent {
     updated_at: new Date()
   };
   users: any[] = [];
+  formSubmitted = false; // Track form submission
+
   constructor(private salesService: AdminDashboardService, private router: Router) { }
 
   ngOnInit(): void {
@@ -42,9 +45,29 @@ export class SalesAddComponent {
   }
 
   addSale(): void {
-    this.salesService.createSale(this.sale).subscribe(() => {
-      this.router.navigate(['admin-dashboard/sales']);
-    });
+    this.formSubmitted = true; // Mark form as submitted
 
+    if (this.isValidForm()) { // Check if form is valid
+      this.salesService.createSale(this.sale).subscribe(() => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Sale added successfully.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['admin-dashboard/sales']);
+        });
+      });
+    }
+  }
+
+  cancel(): void {
+    this.router.navigate(['admin-dashboard/sales']);
+  }
+
+  // Method to check if the form is valid
+  isValidForm(): boolean {
+    const form = document.querySelector('form.needs-validation') as HTMLFormElement;
+    return form.checkValidity();
   }
 }
