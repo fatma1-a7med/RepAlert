@@ -19,11 +19,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Get all users
-        $users = User::all();
+        // Get all users that related to this logged in admin
+        $admin = Auth::guard('sanctum')->user();
+        $users = User::where('admin_id', $admin->id)->get();
         return response()->json($users);
-
-        
     }
 
     /**
@@ -43,7 +42,6 @@ class UserController extends Controller
             'street' => 'required|string|max:255',
             'gender' => 'nullable|string|in:Male,Female|max:50',
             'birthDate' => 'nullable|date',
-            'admin_id' => 'nullable|integer',
             'phone_number' => 'required|string|max:20',
             'territory' => 'required|string|max:255',
             'image' => 'nullable|file|max:1024',
@@ -65,13 +63,13 @@ class UserController extends Controller
             // Store the image path in the validated data array
             $validatedData['image'] = $imageName;
         }
-    
-        // Create the user with the validated data
-        if (!isset($validatedData['admin_id'])) {
-            $validatedData['admin_id'] = Auth::id();
-        }
-
+        
+        
+        $admin = Auth::guard('sanctum')->user();
+        $validatedData['admin_id'] = $admin->id;
+        
         $originalPassword = $request->password;
+
         $user = User::create([
             'admin_id' =>$validatedData['admin_id'],
             'first_name' => $validatedData['first_name'],
@@ -109,8 +107,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        // Get a single user by ID
-        $user = User::findOrFail($id);
+        // Get the current authenticated admin
+        $admin = Auth::guard('sanctum')->user();
+
+        // Get a single user by ID if they belong to the logged-in admin
+        $user = User::where('id', $id)->where('admin_id', $admin->id)->firstOrFail();
         return response()->json($user);
     }
 
@@ -141,8 +142,11 @@ class UserController extends Controller
         'password' => 'sometimes|required|string|min:8',
     ]);
 
-    // Find the user by ID
-    $user = User::findOrFail($id);
+     // Get the current authenticated admin
+     $admin = Auth::guard('sanctum')->user();
+
+     // Find the user by ID if they belong to the logged-in admin
+     $user = User::where('id', $id)->where('admin_id', $admin->id)->firstOrFail();
 
 // Check if the request contains an image file
 if ($request->hasFile('image')) {
@@ -180,10 +184,14 @@ if ($request->hasFile('image')) {
      */
     public function destroy($id)
     {
-        // Find the user
-        $user = User::find($id);
-            // Check if the user exists
-    if (!$user) {
+        // Get the current authenticated admin
+        $admin = Auth::guard('sanctum')->user();
+
+        // Find the user by ID if they belong to the logged-in admin
+        $user = User::where('id', $id)->where('admin_id', $admin->id)->first();
+
+        // Check if the user exists
+        if (!$user) {
         // Return a JSON response indicating the user has already been deleted
         return response()->json(['message' => 'User has already been deleted'], 200);
     }

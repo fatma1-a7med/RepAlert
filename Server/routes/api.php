@@ -6,6 +6,8 @@ use App\Http\Controllers\ForgotPasswordAdminController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordAdminController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ToolController;
+use App\Http\Controllers\Users_Controllers\UserVisitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdminAuthController;
@@ -53,6 +55,8 @@ Route::prefix('admin')->group(function () {
 
         Route::apiResource('sales', SalesController::class);
         Route::get('users/{user}/sales', [SalesController::class,'user_sales']);
+        Route::middleware('auth:sanctum')->get('{adminId}/users', [SalesController::class,'getUsers']);
+
     
     });
 
@@ -73,6 +77,8 @@ Route::prefix('admin')->group(function () {
     Route::get('visits/planned/{user_id}', [VisitController::class, 'getPlannedVisits']);
    
     Route::get('/visits/recent', [VisitController::class, 'recent']);
+    //tools
+    Route::get('/tools', [ToolController::class, 'index']);
 });
 
 Route::prefix('user')->group(function () {
@@ -94,6 +100,12 @@ Route::prefix('user')->group(function () {
 
     Route::middleware('auth:sanctum')->get('visits/latest-visits', [VisitController::class, 'latestVisits']); 
 
+
+    Route::get('visits', [UserVisitController::class, 'index']);
+    Route::get('visits/{id}', [UserVisitController::class, 'show']);
+    Route::post('visits', [UserVisitController::class, 'store']);
+    Route::put('visits/{id}', [UserVisitController::class, 'update']);
+    Route::delete('visits/{id}', [UserVisitController::class, 'delete']);
 });
 
 Route::prefix('users')->middleware('auth:sanctum')->group(function () {

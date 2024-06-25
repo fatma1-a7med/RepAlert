@@ -122,7 +122,15 @@ class SalesController extends Controller
 // Fetch all users
 public function getUsers()
 {
-    $users = User::all();
+   $user = Auth::guard('sanctum')->user();
+
+    if (!$user) {
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
+
+    // Assuming that the 'users' table has an 'admin_id' column
+    $users = User::where('admin_id', $user->id)->get();
+
     return response()->json($users);
 }
 

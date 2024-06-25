@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SalesEditComponent implements OnInit {
   saleId: number;
+  adminId: number=1; 
   sale: any = {
     admin_id: '',
     user_id: '',
@@ -28,6 +29,7 @@ export class SalesEditComponent implements OnInit {
     
   };
 
+  users: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private salesService: AdminDashboardService,
@@ -39,6 +41,9 @@ export class SalesEditComponent implements OnInit {
   ngOnInit(): void {
     this.salesService.getSale(this.saleId).subscribe(data => {
       this.sale = data;
+    });
+    this.salesService.getUsersByAdmin(this.adminId).subscribe(data => {
+      this.users = data;
     });
   }
 
