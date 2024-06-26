@@ -1,0 +1,63 @@
+/* update-profile.component.css */
+
+.update-profile-container {
+  margin-left: 300px;
+    max-width: 400px;
+    /* margin: 0 auto; */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .update-profile-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .update-profile-container form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .update-profile-container label {
+    font-weight: bold;
+  }
+  
+  .update-profile-container input[type="text"],
+  .update-profile-container input[type="email"],
+  .update-profile-container input[type="file"] {
+    width: calc(100% - 20px); /* Adjust width to account for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .update-profile-container button {
+    background-color: #048dcc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .update-profile-container button:hover {
+    background-color: #0251a5;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 0.875rem;
+  }
+  

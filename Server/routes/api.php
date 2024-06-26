@@ -11,7 +11,9 @@ use App\Http\Controllers\Users_Controllers\UserVisitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdminAuthController;
+use App\Http\Controllers\Api\AdminProfileController;
 use App\Http\Controllers\Api\LoctionController;
+use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\doctorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
@@ -121,4 +123,21 @@ Route::get('/visit-reports', [VisitReportingController::class, 'getVisitReports'
 
 
 
+// Admin profile
+// Route::get('/admin/profile', [AdminProfileController::class, 'show']);
+Route::prefix('admin')->group(function () {
+    Route::get('/profile', [AdminProfileController::class, 'index']);
+    Route::get('/profile/{id}', [AdminProfileController::class, 'show']);
+    Route::post('/profile/{id}', [AdminProfileController::class, 'update']); // Route to update profile
+});
+
+
+Route::prefix('user')->group(function () {
+    Route::post('register', [UserAuthController::class, 'createUser']);
+    Route::post('login', [UserAuthController::class, 'loginUser']);
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/profile', [UserProfileController::class, 'index']);
+    Route::get('/profile/{id}', [UserProfileController::class, 'show']);
+    Route::post('/profile/{id}', [UserProfileController::class, 'update']);
+});
 

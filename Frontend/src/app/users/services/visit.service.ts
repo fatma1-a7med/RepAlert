@@ -29,10 +29,10 @@ export class VisitService {
   }
 
   updateVisit(visitData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${visitData.id}`, visitData);
+    return this.http.put(`${this.apiUrl}/${visitData.id}`, visitData,{ headers: this.getAuthHeaders() });
   }
   deleteVisit(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`,{ headers: this.getAuthHeaders() });
   }
 
   getDoctors(): Observable<any[]> {

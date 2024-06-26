@@ -57,31 +57,26 @@
     </tbody>
   </table>
 
-  <!-- Modal -->
-  <div class="modal fade" id="modalVisitDetails" tabindex="-1" aria-labelledby="modalVisitDetailsLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalVisitDetailsLabel">Visit Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-3 m-3" *ngIf="selectedVisit">
-          <p><strong class="text-primary">Medical Rep Name:</strong> {{ selectedVisit.user_full_name }}</p>
-          <p><strong class="text-primary">Doctor Name:</strong> {{ selectedVisit.doctor_name }}</p>
-          <p><strong class="text-primary">Status:</strong> {{ selectedVisit.status }}</p>
-          <p><strong class="text-primary">Tools:</strong> {{ getToolNames(selectedVisit.tools) }}</p>
-          <p><strong class="text-primary">Territory:</strong> {{ selectedVisit.territory }}</p>
-          <p><strong class="text-primary">City:</strong> {{ selectedVisit.city }}</p>
-          <p><strong class="text-primary">State:</strong> {{ selectedVisit.state }}</p>
-          <p><strong class="text-primary">Location Info:</strong></p>
-          <ul class="m-3">
-            <li>Latitude: {{ selectedVisit.location_info.latitude }}</li>
-            <li>Longitude: {{ selectedVisit.location_info.longitude }}</li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalVisitDetails" tabindex="-1" aria-labelledby="modalVisitDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalVisitDetailsLabel">Visit Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3 m-3" *ngIf="selectedVisit">
+        <p><strong class="text-primary">Medical Rep Name:</strong> {{ selectedVisit.user_full_name }}</p>
+        <p><strong class="text-primary">Doctor Name:</strong> {{ selectedVisit.doctor_name }}</p>
+        <p><strong class="text-primary">Status:</strong> {{ selectedVisit.status }}</p>
+        <p><strong class="text-primary">Tools:</strong> {{ getToolNames(selectedVisit.tools) }}</p>
+        <p><strong class="text-primary">Territory:</strong> {{ selectedVisit.territory }}</p>
+        <p><strong class="text-primary">City:</strong> {{ selectedVisit.city }}</p>
+        <p><strong class="text-primary">State:</strong> {{ selectedVisit.state }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

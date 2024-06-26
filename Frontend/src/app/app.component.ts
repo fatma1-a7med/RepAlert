@@ -13,12 +13,27 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // the main connecto
 import dayGridPlugin from '@fullcalendar/daygrid'; // Import the plugins you need
 import { SideBarComponent } from './admin-dashboard/side-bar/side-bar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MessageComponent } from './admin-dashboard/message/message.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink,FormsModule,CommonModule,RouterOutlet,NavbarComponent,HttpClientModule,ListallmedrepComponent, AdminComponent, RouterLink,WelcomeComponent],
-  templateUrl: './app.component.html',
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NavbarComponent,
+    ListallmedrepComponent,
+    AdminComponent,
+    WelcomeComponent,
+    MessageComponent,
+    SideBarComponent,
+    FullCalendarModule
+  ],
+    templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

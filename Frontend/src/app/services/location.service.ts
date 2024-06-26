@@ -12,7 +12,11 @@ export class LocationService {
   constructor(private http: HttpClient) { }
   
   fetchUserLocations(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   saveLocation(userId: string, latitude: number, longitude: number): Observable<any> {

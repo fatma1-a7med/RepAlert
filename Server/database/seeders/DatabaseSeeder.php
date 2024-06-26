@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
               DoctorsTableSeeder::class,
              ToolsTableSeeder::class,
              SalesTableSeeder::class, 
-            /* VisitsTableSeeder::class,
-             DoctorsToolsSeeder::class,*/
+             VisitsTableSeeder::class,
+             DoctorsToolsSeeder::class,
 
         ]);
 

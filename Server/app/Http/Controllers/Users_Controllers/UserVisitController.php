@@ -34,7 +34,7 @@ class UserVisitController extends Controller
         $user = Auth::user();
         $validatedData = $request->validate([
             //'user_id' => 'required|integer|exists:users,id',
-            'doctor_id' => 'required|integer|exists:doctors,id',
+            'doctor_id' => 'integer|exists:doctors,id',
             'visit_date' => 'required|date',
             'visit_time' => 'required',
             'purpose' => 'required|string',
