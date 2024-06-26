@@ -1,54 +1,57 @@
-/* Styling for the dialog title */
-mat-dialog-title {
-  font-size: 1.75rem;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-  padding: 10px;
-
-}
-
-/* Styling for the dialog content */
-mat-dialog-content {
-  font-size: 1rem;
-  line-height: 1.6;
+.visit-details-dialog {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Update font family */
+  max-width: 600px; /* Limit maximum width */
+  margin: 0 auto; /* Center align horizontally */
   padding: 20px;
-  color: #555;
-  
-  
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-p{
-  text-align: center;
-  margin: 10px 0;
-  font-size: 1.1rem;
-
-}
- p strong {
+.dialog-title {
+  font-size: 28px;
+  font-weight: bold;
   color: #333;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Styling for the dialog actions */
-mat-dialog-actions {
+.dialog-content {
+  padding: 20px;
+}
+
+.details-item {
+  margin-bottom: 15px;
+}
+
+.dialog-content p {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+  line-height: 1.6; /* Improved line height for readability */
+}
+
+.dialog-content p strong {
+  color: #000;
+}
+
+.dialog-actions {
   display: flex;
-  justify-content: center;
-  padding: 70px;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
-/* Styling for the close button */
-button.close-button {
-  background-color: #2196F3;
-  color: white;
-  padding: 10px 20px;
+.close-button {
+  background-color: #1CA4AC;
+  color: #fff;
   border: none;
-  border-radius: 25px;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s, transform 0.3s;
-  float:right;
-  margin: 10px;
+  transition: background-color 0.3s ease;
 }
 
-
+.close-button:hover {
+  background-color: #138d92;
+}

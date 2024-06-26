@@ -34,21 +34,25 @@
     <hr class=" custom-hr">
   </div>
 
-  <div class="visit-section">
-    <div class="visit-history">
-      <h5>Visit History</h5>
-      <div class="visit-card" *ngFor="let visit of visitHistory">
-        <p class="visit-name">{{ visit.purpose }}</p>
-        <p>{{ visit.visit_date }} - {{ visit.visit_time }}</p>
-        <button mat-button (click)="readMore(visit)">Read more</button> 
-      </div>
+
+<div class="visit-section">
+  <div class="visit-history">
+    <h5>Visit History</h5>
+    <div class="visit-card" *ngFor="let visit of visitHistory">
+      <p class="visit-name">{{ visit.purpose }}</p>
+      <p>{{ visit.visit_date }} - {{ visit.visit_time }}</p>
+      <button mat-button (click)="readMore(visit)" >Read more</button> 
     </div>
+  </div>
+
 
     <div class="planned-visits">
       <h5>Planned visits</h5>
        <full-calendar [options]="calendarOptions" *ngIf="calendarOptions"></full-calendar>  </div>
   </div>
 </div>
+
+
 </div>
   
 

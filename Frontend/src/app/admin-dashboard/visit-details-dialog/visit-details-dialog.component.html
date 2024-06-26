@@ -1,12 +1,29 @@
-<h1 mat-dialog-title>Visit Details</h1>
-<div mat-dialog-content style="height: 300px; width:400px ">
-  <p ><strong>Doctor Name:</strong> {{ data.doctor_name }}</p>
-  <p><strong>Territory:</strong> {{ data.territory }}</p>
-  <p><strong>City:</strong> {{ data.city }}</p>
-  <p><strong>State:</strong> {{ data.state }}</p>
-  <p><strong>Location Info:</strong> {{ data.location_info }}</p>
-  <p><strong>User Full Name:</strong> {{ data.user_full_name }}</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button class="close-button" (click)="onClose()">Close</button>
+<div class="visit-details-dialog">
+  <h1 class="dialog-title">Visit Details</h1>
+  <div class="dialog-content">
+    <div class="details-item">
+      
+      <p><strong>Visit Status:</strong> {{ data.status }}</p>
+    </div>
+    <div class="details-item">
+
+      <p><strong>Doctor Name:</strong> {{ data.doctor_name }}</p>
+    </div>
+    <div class="details-item">
+      <p><strong>Territory:</strong> {{ data.territory }}</p>
+    </div>
+    <div class="details-item">
+      <p><strong>City:</strong> {{ data.city }}</p>
+    </div>
+    <div class="details-item">
+      <p><strong>State:</strong> {{ data.state }}</p>
+    </div>
+  
+    <div class="details-item">
+      <p><strong>User Full Name:</strong> {{ data.user_full_name }}</p>
+    </div>
+  </div>
+  <div class="dialog-actions">
+    <button mat-button class="close-button" (click)="onClose()">Close</button>
+  </div>
 </div>
