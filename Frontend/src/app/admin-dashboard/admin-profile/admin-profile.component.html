@@ -1,0 +1,23 @@
+
+<div class="admin-profile-container">
+  <h2>Admin Profile</h2>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div class="profile-info">
+    <div class="left-column">
+      <p><strong>First Name:</strong> {{ adminProfile[0]?.first_name }}</p>
+      <p><strong>Last Name:</strong> {{ adminProfile[0]?.last_name }}</p>
+      <p><strong>Email:</strong> {{ adminProfile[0]?.email }}</p>
+      <p><strong>Phone Number:</strong> {{ adminProfile[0]?.phone_number }}</p>
+      <p><strong>Territory:</strong> {{ adminProfile[0]?.territory }}</p>
+    </div>
+    <div class="right-column">
+      <p><strong>City:</strong> {{ adminProfile[0]?.city }}</p>
+      <p><strong>State:</strong> {{ adminProfile[0]?.state }}</p>
+      <p><strong>Street:</strong> {{ adminProfile[0]?.street }}</p>
+      <p><strong>Image:</strong> <img [src]="adminProfile?.image" class="profile-image" ></p>
+
+    </div>
+  </div>
+  <button class="update-button" (click)="navigateToUpdateProfile()">Update</button>
+</div>
+

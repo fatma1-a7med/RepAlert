@@ -1,0 +1,70 @@
+<div class="update-profile-container">
+  <h2>Update Profile</h2>
+  <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="first_name">First Name:</label>
+      <input id="first_name" formControlName="first_name" type="text" />
+      <div *ngIf="updateProfileForm.get('first_name')?.hasError('onlyLetters')" class="error-message">
+        Only letters are allowed.
+      </div>
+    </div>
+    <div>
+      <label for="last_name">Last Name:</label>
+      <input id="last_name" formControlName="last_name" type="text" />
+      <div *ngIf="updateProfileForm.get('last_name')?.hasError('onlyLetters')" class="error-message">
+        Only letters are allowed.
+      </div>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" />
+      <div *ngIf="updateProfileForm.get('email')?.hasError('emailFormat')" class="error-message">
+        Invalid email format.
+      </div>
+      <div *ngIf="emailError" class="error-message">
+        This email has been used before.
+      </div>
+    
+    </div>
+    <div>
+      <label for="phone_number">Phone Number:</label>
+      <input id="phone_number" formControlName="phone_number" type="text" />
+      <div *ngIf="updateProfileForm.get('phone_number')?.hasError('numeric')">
+        <span class="error-message">Phone number should be number.</span>
+      </div>
+    </div>
+    <div>
+      <label for="territory">Territory:</label>
+      <input id="territory" formControlName="territory" type="text" />
+      <div *ngIf="updateProfileForm.get('territory')?.hasError('onlyLetters')" class="error-message">
+        Only letters are allowed.
+      </div>
+    </div>
+    <div>
+      <label for="city">City:</label>
+      <input id="city" formControlName="city" type="text" />
+      <div *ngIf="updateProfileForm.get('city')?.hasError('onlyLetters')" class="error-message">
+        Only letters are allowed.
+      </div>
+    </div>
+    <div>
+      <label for="state">State:</label>
+      <input id="state" formControlName="state" type="text" />
+      <div *ngIf="updateProfileForm.get('state')?.hasError('onlyLetters')" class="error-message">
+        Only letters are allowed.
+      </div>
+    </div>
+    <div>
+      <label for="street">Street:</label>
+      <input id="street" formControlName="street" type="text" />
+      <div *ngIf="updateProfileForm.get('street')?.hasError('alphanumeric')" class="error-message">
+        Only alphanumeric characters are allowed.
+      </div>
+    </div>
+    <div>
+      <label for="image">Image:</label>
+      <input id="image" formControlName="image" type="file" (change)="onFileChange($event)" />
+    </div>
+    <button type="submit" [disabled]="updateProfileForm.invalid">Update</button>
+  </form>
+</div>

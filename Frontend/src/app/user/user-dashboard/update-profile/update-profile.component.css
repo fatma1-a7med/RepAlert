@@ -1,0 +1,60 @@
+/* styles.css or your component-specific CSS file */
+
+.update-user-profile-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .update-user-profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .update-user-profile-container form {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .update-user-profile-container label {
+    font-weight: bold;
+  }
+  
+  .update-user-profile-container input,
+  .update-user-profile-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .update-user-profile-container button {
+    background-color: #048dcc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .update-profile-container button:hover {
+    background-color: #0251a5;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 0.875rem;
+  }
+  
+  
+  
+  

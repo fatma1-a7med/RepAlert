@@ -1,0 +1,24 @@
+<div class="user-profile-container">
+  <h2>User Profile</h2>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div class="profile-info">
+    <div class="left-column">
+      <div *ngIf="userProfile">
+        <div class="profile-box">
+          <p><strong>First Name:</strong> {{ userProfile[0]?.first_name }}</p>
+          <p><strong>Last Name:</strong> {{ userProfile[0]?.last_name }}</p>
+          <p><strong>State:</strong> {{ userProfile[0]?.state }}</p>
+          <p><strong>City:</strong> {{ userProfile[0]?.city }}</p>
+          <p><strong>Street:</strong> {{ userProfile[0]?.street }}</p>
+          <p><strong>Phone Number:</strong> {{ userProfile[0]?.phone_number }}</p>
+          <p><strong>Territory:</strong> {{ userProfile[0]?.territory }}</p>
+          <p><strong>Email:</strong> {{ userProfile[0]?.email }}</p>
+          <p><strong>Gender:</strong> {{ userProfile[0]?.gender }}</p>
+          <p><strong>Birth Date:</strong> {{ userProfile[0]?.birthDate }}</p>
+          <p><strong>Image:</strong> <img [src]="userProfile?.image" class="profile-image"></p>
+        </div>
+      </div>
+      <button class="update-button" (click)="navigateToUpdateProfile()">Update</button>
+    </div>
+  </div>
+</div>

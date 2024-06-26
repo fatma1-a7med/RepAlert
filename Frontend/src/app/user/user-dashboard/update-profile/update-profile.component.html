@@ -1,0 +1,84 @@
+<!-- update-user-profile.component.html -->
+<div class="update-user-profile-container">
+  <h2>Update User Profile</h2>
+  <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+    <!-- First Name -->
+    <label for="first_name">First Name</label>
+    <input id="first_name" type="text" formControlName="first_name">
+    <div *ngIf="updateProfileForm.get('first_name')?.hasError('onlyLetters')">
+      <span class="error-message">First name should contain only letters.</span>
+    </div>
+
+    <!-- Last Name -->
+    <label for="last_name">Last Name</label>
+    <input id="last_name" type="text" formControlName="last_name">
+    <div *ngIf="updateProfileForm.get('last_name')?.hasError('onlyLetters')">
+      <span class="error-message">Last name should contain only letters.</span>
+    </div>
+
+    <!-- State -->
+    <label for="state">State</label>
+    <input id="state" type="text" formControlName="state">
+    <div *ngIf="updateProfileForm.get('state')?.hasError('onlyLetters')">
+      <span class="error-message">State should contain only letters.</span>
+    </div>
+
+    <!-- City -->
+    <label for="city">City</label>
+    <input id="city" type="text" formControlName="city">
+    <div *ngIf="updateProfileForm.get('city')?.hasError('onlyLetters')">
+      <span class="error-message">City should contain only letters.</span>
+    </div>
+
+    <!-- Street -->
+    <label for="street">Street</label>
+    <input id="street" type="text" formControlName="street">
+    <div *ngIf="updateProfileForm.get('street')?.hasError('alphanumeric')">
+      <span class="error-message">Street should contain only alphanumeric characters.</span>
+    </div>
+
+    <!-- Phone Number -->
+    <label for="phone_number">Phone Number</label>
+    <input id="phone_number" type="text" formControlName="phone_number">
+    <div *ngIf="updateProfileForm.get('phone_number')?.hasError('numeric')">
+      <span class="error-message">Phone number should be number.</span>
+    </div>
+
+    <!-- Territory -->
+    <label for="territory">Territory</label>
+    <input id="territory" type="text" formControlName="territory">
+    <div *ngIf="updateProfileForm.get('territory')?.hasError('onlyLetters')">
+      <span class="error-message">Territory should contain only letters.</span>
+    </div>
+
+    <!-- Image -->
+    <label for="image">Image</label>
+    <input id="image" type="file" (change)="onFileChange($event)" accept="image/*">
+
+
+    <!-- Gender -->
+    <label for="gender">Gender</label>
+    <select id="gender" formControlName="gender">
+      <option value="" disabled>Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <!-- Birth Date -->
+    <label for="birthDate">Birth Date</label>
+    <input id="birthDate" type="date" formControlName="birthDate">
+
+    <!-- Email -->
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email">
+    <div *ngIf="updateProfileForm.get('email')?.hasError('emailFormat')">
+      <span class="error-message">Invalid email format.</span>
+    </div>
+    <div *ngIf="emailError" class="error-message">
+      This email has been used before.
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="updateProfileForm.invalid">Update</button>
+  </form>
+</div>
